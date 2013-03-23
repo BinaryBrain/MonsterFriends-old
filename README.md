@@ -1,4 +1,4 @@
-FaceMonster
-===========
+MonsterFriends
+==============
 
 Battle your friends #HackEPFL
