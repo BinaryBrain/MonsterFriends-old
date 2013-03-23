@@ -1,83 +1,89 @@
-var ctx;
-var cw, ch;
-var headWidth, headHeight = 100;
-var battleWidth, battleHeight;
-var actionWidth, actionHeight = 150;
-var pWidth = 160, pHeight = 160;
-var hpWidth = 400, hpHeight = 50;
-var pBordSpace = 20, hpBordSpace = 20;
-var h1, h2, h3;
-var pi = Math.PI;
-var p1, p2, lp1, lp2;
+C = {
 
-var hp1, hp2;
+headHeight: 100,
+actionsHeight : 150,
+vsWidth: 150, vsHeight: 50,
+pWidth: 160, pHeight: 160,
+hpWidth: 400, hpHeight: 50,
+vsSpace: 5, pBordSpace: 20, hpBordSpace: 20, actionsSpace: 20,
+pi: Math.PI,
 
-State = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENNEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
-
-var state = State.FIGHT;
+//attacks: {'','','',''},
 		
 // load the images and set the basic variables
-function init(){
+init : function (){
 	
-	ctx = document.getElementById('canvas').getContext('2d');
-	cw = document.getElementById('canvas').width,
-	ch = document.getElementById('canvas').height;
+	C.ctx = document.getElementById('canvas').getContext('2d');
+	C.cw = document.getElementById('canvas').width,
+	C.ch = document.getElementById('canvas').height;
 	
-	p1 = new Image();
-	p1.onload = function() {
-		p2 = new Image();
-		p2.onload = function() {	
-			lp1 = new Image();
-			lp1.onload = function() {
-				lp2 = new Image();
-				lp2.onload = function() {
-					draw();
+	C.p1 = new Image();
+	C.p1.onload = function() {
+		C.p2 = new Image();
+		C.p2.onload = function() {	
+			C.lp1 = new Image();
+			C.lp1.onload = function() {
+				C.lp2 = new Image();
+				C.lp2.onload = function() {
+					C.drawFight(); // change
 				} 
-				lp2.src = '../static/img/lp2.jpg';
+				C.lp2.src = '../static/img/lp2.jpg';
 			} 
-			lp1.src = '../static/img/lp1.jpg';
+			C.lp1.src = '../static/img/lp1.jpg';
 		} 
-		p2.src = '../static/img/p2.jpg';
+		C.p2.src = '../static/img/p2.jpg';
 	} 
-	p1.src = '../static/img/p1.jpg';
+	C.p1.src = '../static/img/p1.jpg';
 	
-	headWidth = cw;
-	battleWidth = cw;
-	actionWidth = cw;
+	C.headWidth = C.cw;
+	C.battleWidth = C.cw;
+	C.actionsWidth = C.cw;
 	
-	battleHeight = ch - (headHeight + actionHeight);
+	C.battleHeight = C.ch - (C.headHeight + C.actionsHeight);
 	
-	h1 = 0;
-	h2 = h1 + headHeight;
-	h3 = h2 + battleHeight;
-	h4 = ch;
+	C.h1 = 0;
+	C.h2 = C.h1 + C.headHeight;
+	C.h3 = C.h2 + C.battleHeight;
+	C.h4 = C.ch;
 	
-}
-
-// draws according to the situation
-function draw () {
-	if (state == State.MENU) drawMenu();
-	else if(state == State.FIGHT) drawFight();
-	else if(state == State.EVOLUTION) drawFight();
-	else if(state == State.ENEMYCHOICE) drawFight();
-	else if(state == State.HISTORY) drawFight();
-	else if(state == State.MONSTERS) drawFight();
-}
+},
 
 // function used to draw the game
-function drawFight() {
+drawFight : function () {
+	
+	// p1 vs p2
+	C.imgSize = 50;
+	C.fontSize = 20;
+	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	
+	var ctx = C.ctx;
+	ctx.drawImage(C.lp1, C.headWidth/2 - C.imgSize*1.5, C.headHeight/2 - C.imgSize/2);
+	ctx.drawImage(C.lp2, C.headWidth/2 + C.imgSize/2 , C.headHeight/2 - C.imgSize/2);
+	ctx.font = (C.font);
+	ctx.fillText('vs', C.headWidth/2 - C.fontSize/2, C.headHeight/2);
 	
 	// players 
-	ctx.drawImage(p1, pBordSpace, h3-(pHeight + pBordSpace));
-	ctx.drawImage(p2, battleWidth-(pWidth + pBordSpace), h2 + pBordSpace);
+	ctx.drawImage(C.p1, C.pBordSpace, C.h3-(C.pHeight + C.pBordSpace));
+	ctx.drawImage(C.p2, C.battleWidth-(C.pWidth + C.pBordSpace), C.h2 + C.pBordSpace);
+	
+	var r = 20;
+	var vsw = C.vsWidth;
+	var vsh = C.vsHeight;
+	var vss = C.vsSpace;
+	var hw = C.hpWidth;
+	var bw = C.battleWidth;
+	var hh = C.hpHeight;
+	var ps = C.pBordSpace;
+	var hps = C.hpBordSpace;
+	
+	var pi = C.pi;
+	var h2 = C.h2;
+	var h3 = C.h3;
+	var h4 = C.h4;
+	
+	
 	
 	// name, lvl, hp
-	var r = 20;
-	var hw = hpWidth;
-	var bw = battleWidth;
-	var hh = hpHeight;
-	var ps = pBordSpace;
-	var hps = hpBordSpace;
 	
 	ctx.lineWidth = 2;
 	ctx.beginPath();
@@ -102,34 +108,52 @@ function drawFight() {
 	ctx.lineTo(bw - (hw + hps), h3 - (hh + hps + r));
 	ctx.stroke();
 	
-}
+	
+	// actions
+	
+	var aw = C.actionsWidth;
+	var as = C.actionsSpace;
+	
+	ctx.beginPath();
+	ctx.arc(as + r, h3 + as, r, pi, 1.5*pi, false);
+	ctx.lineTo(aw - (as + r), h3 + as - r);
+	ctx.arc(aw - as - r, h3 + as, r, 1.5*pi, 0, false);
+	ctx.lineTo(aw - as, h4 - (as + r));
+	ctx.arc(aw - (as + r), h4 - (as + r), r, 0, 0.5*pi, false);
+	ctx.lineTo(aw - (as + 2*r), h4 - as);
+	ctx.arc(as + r, h4 - (as+r), r, 0.5*pi, pi, false);
+	ctx.lineTo(as, h3 + as);
+	ctx.stroke();
+},
 
 // Draws the menu
-function drawMenu () {
+drawMenu : function () {
 	// TODO
-}
+},
 
 // Just a simple notification or something to draw on the current screen
-function drawVictory () {
+drawVictory : function () {
 	
-}
+},
 
 // Draws the elvove screen
-function drawEvolution () {
+drawEvolution : function () {
 
-}
+},
 
 // Draws the match history
-function drawHistory () {
+ drawHistory : function () {
 
-}
+},
 
 // Draws the monsters 
-function drawMonsters () {
+drawMonsters : function () {
+
+},
+
+// Draws the enemy choice
+drawEnemyChoice : function () {
 
 }
 
-// Draws the enemy choice
-function drawEnemyChoice () {
-
-} 
+}
