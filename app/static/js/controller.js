@@ -7,9 +7,63 @@
 // Controls things. Yeah.
 
 $(function () {
+
+	Console.consoleNode = $("#console");
 	
 })
 
+// Different scenes
+Scene = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
+
+
+/*
+ * Controller Object
+ *
+ * Represents the Controller of the Client-Side app.
+ * 
+ */
+Controller = {
+
+	// Starting scene
+	scene: Scene.FIGHT,
+	userID: 0,
+	
+	changeScene: function(scene) {
+		Console.hide();
+		this.scene = scene;
+		
+		switch(scene)
+		{
+			case Scene.MENU:
+				drawMenu();
+			break;
+			
+			case Scene.FIGHT:
+				Console.show();
+				drawFight();
+			break;
+			
+			case Scene.EVOLUTION:
+				drawEvolution();
+			break;
+			
+			case Scene.ENEMYCHOICE:
+				drawEnemyChoice();
+			break;
+			
+			case Scene.HISTORY:
+				drawHistory();
+			break;
+			
+			case Scene.MONSTERS:
+				drawMonsters();
+			break;
+		}
+	}
+
+	
+
+}
 
 
 
@@ -20,24 +74,18 @@ $(function () {
  * 
  */
 Console = {
-
-	consoleNode: $("#console"),
-
 	hide: function () {
-		var consoleNode = $("#console");
-		consoleNode.hide();
+		this.consoleNode.hide();
 	},
 
 	show: function () {
-		var consoleNode = $("#console");
-		consoleNode.show();
+		this.consoleNode.show();
 	},
 
 	archieveMessage: function (msg) {
-		var consoleNode = $("#console");
 		var html = msg + "<br>";
-		consoleNode.html(consoleNode.html() + html);
-		consoleNode.scrollTop(consoleNode[0].scrollHeight);
+		this.consoleNode.html(consoleNode.html() + html);
+		this.consoleNode.scrollTop(consoleNode[0].scrollHeight);
 	},
 	
 	ability: function (monsterName, abilityName) {
