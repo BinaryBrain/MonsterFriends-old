@@ -26,23 +26,31 @@ Controller = {
 	// Starting scene
 	scene: Scene.MENU,
 	
-	changeScene: function(scene, data) {
+	changeScene: function(scene) {
 		Console.hide();
 		this.scene = scene;
 		
 		switch(scene)
 		{
 			case Scene.MENU:
-				drawMenu(data.oid);
+				Network.getCurrentFight(
+					function (data) {
+						// TODO : Que nenni en théorie, mais on sait jamais
+						var result = data;
+						drawMenu();
+					}
+				);
 			break;
 			
 			case Scene.FIGHT:
 				Console.show();
-				drawFight();
-			break;
-			
-			case Scene.EVOLUTION:
-				drawEvolution();
+				Network.getFightInfos(
+					function(data) {
+						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
+						var result = data;
+						drawFight(result);
+					}
+				);
 			break;
 			
 			case Scene.ENEMYCHOICE:
