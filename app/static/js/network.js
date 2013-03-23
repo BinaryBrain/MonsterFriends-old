@@ -1,6 +1,10 @@
 var socket = io.connect('http://67.222.130.183');
 
-socket.on('news', function (data) {
+socket.on('connect', function (data) {
+  myid = socket.socket.sessionid;
+  alert(data);
   console.log(data);
-  socket.emit('my other event', { my: 'data' });
+  socket.emit('hello', { fbid: '1063020932' });
+
+  socket.on('error', function (err) { alert(err.type)})
 });
