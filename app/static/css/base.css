@@ -1,6 +1,11 @@
 body {
-	
+	font-family: merriweather, sans-serif;
 }
+
+@font-face {
+ font-family:merriweather;
+ src: url(../font/MerriweatherSans-Regular.ttf);
+} 
 
 #container {
 	width:800px;
@@ -31,6 +36,8 @@ body {
 #canvasContainer {
 	margin-left:auto;
 	margin-right:auto;
+	border:solid 1px black;
+	margin-bottom:10px;
 }
 
 #console {
@@ -39,6 +46,7 @@ body {
 	width:800px;
 	margin-left:auto;
 	margin-right:auto;
+	border:1px solid black;
 }
 
 
