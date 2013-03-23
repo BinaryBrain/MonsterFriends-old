@@ -15,7 +15,6 @@ $(function () {
 // Different scenes
 Scene = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
 
-
 /*
  * Controller Object
  *
@@ -25,17 +24,16 @@ Scene = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENEMYCHOICE : 3, HISTORY : 4, MONST
 Controller = {
 
 	// Starting scene
-	scene: Scene.FIGHT,
-	userID: 0,
+	scene: Scene.MENU,
 	
-	changeScene: function(scene) {
+	changeScene: function(scene, data) {
 		Console.hide();
 		this.scene = scene;
 		
 		switch(scene)
 		{
 			case Scene.MENU:
-				drawMenu();
+				drawMenu(data.oid);
 			break;
 			
 			case Scene.FIGHT:
@@ -48,21 +46,41 @@ Controller = {
 			break;
 			
 			case Scene.ENEMYCHOICE:
+				Network.askFight(
+					function (eid, data) {
+						// TODO : Give arguments to drawEnemyChoice
+						var result = data;
+						drawEnemyChoice(eid, data);
+					}
+				);
 				drawEnemyChoice();
 			break;
 			
 			case Scene.HISTORY:
-				drawHistory();
+				Network.getMatchHistory(
+					function (data) {
+						// TODO : Give arguments to drawHistory
+						var result = data;
+						drawHistory(result);
+					}
+				);
 			break;
 			
 			case Scene.MONSTERS:
+				Network.getMyMonsters(
+					function (data) {
+						// TODO : Give arguments to drawMonsters
+						var result  = data;
+						drawMonsters(result);
+					}
+				);
 				drawMonsters();
 			break;
 		}
 	}
-
 	
-
+	
+	
 }
 
 
@@ -84,8 +102,8 @@ Console = {
 
 	archieveMessage: function (msg) {
 		var html = msg + "<br>";
-		this.consoleNode.html(consoleNode.html() + html);
-		this.consoleNode.scrollTop(consoleNode[0].scrollHeight);
+		this.consoleNode.html(this.consoleNode.html() + html);
+		this.consoleNode.scrollTop(this.consoleNode[0].scrollHeight);
 	},
 	
 	ability: function (monsterName, abilityName) {
