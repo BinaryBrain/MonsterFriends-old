@@ -10,23 +10,23 @@ from gevent import monkey
 
 monkey.patch_all()
 
-class FlaskNamespace(BaseNamespace):
-    def __init__(self, *args, **kwargs):
-        request = kwargs.get('request', None)
-        self.ctx = None
-        if request:
-            self.ctx = current_app.request_context(request.environ)
-            self.ctx.push()
-            current_app.preprocess_request()
-            del kwargs['request']
-        super(BaseNamespace, self).__init__(*args, **kwargs)
+# class FlaskNamespace(BaseNamespace):
+#     def __init__(self, *args, **kwargs):
+#         request = kwargs.get('request', None)
+#         self.ctx = None
+#         if request:
+#             self.ctx = current_app.request_context(request.environ)
+#             self.ctx.push()
+#             current_app.preprocess_request()
+#             del kwargs['request']
+#         super(BaseNamespace, self).__init__(*args, **kwargs)
+#
+#     def disconnect(self, *args, **kwargs):
+#         if self.ctx:
+#             self.ctx.pop()
+#         super(BaseNamespace, self).disconnect(*args, **kwargs)
 
-    def disconnect(self, *args, **kwargs):
-        if self.ctx:
-            self.ctx.pop()
-        super(BaseNamespace, self).disconnect(*args, **kwargs)
-
-class BattleNamespace(FlaskNamespace):
+class BattleNamespace(BaseNamespace):
 
     # TODO Gérer Redis !!!
 
@@ -39,7 +39,6 @@ class BattleNamespace(FlaskNamespace):
 
     def on_hello(self, fbid):
         self.fbid = fbid
-        self.emit('')
         # TODO: check if the state we're in
 
     def on_ask_fight(self, eid):
