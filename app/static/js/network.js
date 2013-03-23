@@ -1,4 +1,4 @@
-var socket = io.connect('http://67.222.130.183');
+var socket = io.connect();
 
 Network = {
   getMatchHistory: function (cb) {
