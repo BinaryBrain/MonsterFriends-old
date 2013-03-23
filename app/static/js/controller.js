@@ -35,9 +35,9 @@ Controller = {
 			case Scene.MENU:
 				Network.getCurrentFight(
 					function (data) {
-						// TODO : Que nenni en théorie, mais on sait jamais
+						// TODO : Recevoir l'oid
 						var result = data;
-						drawMenu();
+						drawMenu(result);
 					}
 				);
 			break;

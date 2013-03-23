@@ -25,7 +25,7 @@ init : function (){
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					C.drawFight(); // change
+					C.drawMenu(); // change
 				} 
 				C.lp2.src = '../static/img/lp2.jpg';
 			} 
@@ -101,8 +101,25 @@ drawFight : function () {
 },
 
 // Draws the menu
-drawMenu : function () {
-	// TODO
+drawMenu : function (oid) {
+
+	C.fontSize = 20;
+	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	
+	var ctx = C.ctx;
+	ctx.font = (C.font);
+	
+	var buttonWidth = 200;
+	var buttonHeight = 40;
+	var buttonVSpacing = 20;
+	
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing), buttonWidth, buttonHeight);
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing)*2, buttonWidth, buttonHeight);
+	ctx.textAlign="center";
+	ctx.fillText('Fight la vie', C.headWidth/2 - C.fontSize/2, C.headHeight/2);
+
+	
 },
 
 // Just a simple notification or something to draw on the current screen
