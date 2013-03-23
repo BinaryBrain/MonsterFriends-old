@@ -22,12 +22,16 @@ Network = {
     })
   },
   
-  askFight: function (eid, cb) {
-    socket.emit('ask_fight', { eid: eid })
+  askFight: function (oid, cb) {
+    socket.emit('ask_fight', { oid: oid })
     socket.on('ok', function () {
       cb()
     })
-  }
+  },
+
+  attack: function (fid, aid) {
+    socket.emit('attack', { fid: fid, aid: aid })
+  },
 }
 
 socket.on('connect', function (data) {
@@ -41,12 +45,14 @@ socket.on('connect', function (data) {
   socket.on('error', function (err) { Game.error(err.type+": "+err.msg); })
 
   // OR OK
-  socket.on('welcome', function () {
-    Game.on_welcome();
+  socket.on('welcome', function (data) {
+    var fighting = data.oid
+    
+    Controller.todo({ oid: oid });
     
     socket.on('fight', function (data) {
       var fightID = data.fid;
-      var enemyID = data.eid;
+      var enemyID = data.oid;
       var data = data.data
       
       Game.on_fight(fightID, enemyID, fight);

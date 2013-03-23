@@ -24,6 +24,10 @@ monkey.patch_all()
 def hello_world():
     return render_template('base.html')
 
+@app.route('/facebook')
+def hello_facebook():
+    return render_template('facebook.html')
+
 
 @app.route('/socket.io/<path:path>')
 def run_socketio(path):
