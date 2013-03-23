@@ -42,7 +42,7 @@ class Attak(db.Model):
     __tablename__ = 'attaks'
 
     id = db.Column(db.Integer, primary_key=True)
-    atk_name = db.Column(db.String)
+    atk_name = db.Column(db.String, unique=True)
     type = db.Column(db.Enum(*TYPES))
     dmg = db.Column(db.Integer)
     desc = db.Column(db.Text)

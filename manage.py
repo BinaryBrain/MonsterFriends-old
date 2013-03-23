@@ -3,9 +3,9 @@
 
 from flask.ext.script import Manager
 
-from monsterfriends import app, db
+from app.monsterfriends import app, db
 
-from models import User, Attak, Monster
+from app.models import User, Attak, Monster
 
 manager = Manager(app)
 
