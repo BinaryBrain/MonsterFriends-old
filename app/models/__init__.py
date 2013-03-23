@@ -7,6 +7,8 @@ from app.constant import TYPES
 
 db = SQLAlchemy()
 
+__all__ = ['User', 'Monster', 'Attak', 'db']
+
 class User(db.Model):
 
     __tablename__ = 'users'
