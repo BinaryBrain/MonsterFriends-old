@@ -8,7 +8,13 @@ var hpWidth = 400, hpHeight = 50;
 var pBordSpace = 20, hpBordSpace = 20;
 var h1, h2, h3;
 var pi = Math.PI;
-var p1, p2;
+var p1, p2, lp1, lp2;
+
+var hp1, hp2;
+
+State = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENNEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
+
+var state = State.FIGHT;
 		
 // load the images and set the basic variables
 function init(){
@@ -20,11 +26,19 @@ function init(){
 	p1 = new Image();
 	p1.onload = function() {
 		p2 = new Image();
-		p2.onload = function() {
-			draw();
-		}
+		p2.onload = function() {	
+			lp1 = new Image();
+			lp1.onload = function() {
+				lp2 = new Image();
+				lp2.onload = function() {
+					draw();
+				} 
+				lp2.src = '../static/img/lp2.jpg';
+			} 
+			lp1.src = '../static/img/lp1.jpg';
+		} 
 		p2.src = '../static/img/p2.jpg';
-	}
+	} 
 	p1.src = '../static/img/p1.jpg';
 	
 	headWidth = cw;
@@ -40,8 +54,18 @@ function init(){
 	
 }
 
+// draws according to the situation
+function draw () {
+	if (state == State.MENU) drawMenu();
+	else if(state == State.FIGHT) drawFight();
+	else if(state == State.EVOLUTION) drawFight();
+	else if(state == State.ENEMYCHOICE) drawFight();
+	else if(state == State.HISTORY) drawFight();
+	else if(state == State.MONSTERS) drawFight();
+}
+
 // function used to draw the game
-function draw() {
+function drawFight() {
 	
 	// players 
 	ctx.drawImage(p1, pBordSpace, h3-(pHeight + pBordSpace));
@@ -78,5 +102,34 @@ function draw() {
 	ctx.lineTo(bw - (hw + hps), h3 - (hh + hps + r));
 	ctx.stroke();
 	
+}
+
+// Draws the menu
+function drawMenu () {
+	// TODO
+}
+
+// Just a simple notification or something to draw on the current screen
+function drawVictory () {
 	
 }
+
+// Draws the elvove screen
+function drawEvolution () {
+
+}
+
+// Draws the match history
+function drawHistory () {
+
+}
+
+// Draws the monsters 
+function drawMonsters () {
+
+}
+
+// Draws the enemy choice
+function drawEnemyChoice () {
+
+} 
