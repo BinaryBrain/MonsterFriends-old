@@ -11,6 +11,8 @@ $(function () {
 })
 
 
+
+
 /*
  * Console Object
  *
@@ -18,6 +20,18 @@ $(function () {
  * 
  */
 Console = {
+
+	consoleNode: $("#console"),
+
+	hide: function () {
+		var consoleNode = $("#console");
+		consoleNode.hide();
+	},
+
+	show: function () {
+		var consoleNode = $("#console");
+		consoleNode.show();
+	},
 
 	archieveMessage: function (msg) {
 		var consoleNode = $("#console");
