@@ -4,7 +4,7 @@ headHeight: 100,
 actionsHeight : 150,
 vsWidth: 150, vsHeight: 50,
 pWidth: 160, pHeight: 160,
-hpWidth: 400, hpHeight: 50,
+hpWidth: 400, hpHeight: 100,
 vsSpace: 5, pBordSpace: 20, hpBordSpace: 20, actionsSpace: 20,
 pi: Math.PI,
 
@@ -86,44 +86,18 @@ drawFight : function () {
 	// name, lvl, hp
 	
 	ctx.lineWidth = 2;
-	ctx.beginPath();
-	ctx.arc(hps + r, h2 + r, r, pi, 1.5*pi, false);
-	ctx.lineTo(hps + hw - r, h2);
-	ctx.arc(hps + hw - r, h2 + r, r, 1.5*pi, 0, false);
-	ctx.lineTo(hps + hw, h2 + hh - r);
-	ctx.arc(hps + hw - r, h2 + hh + r, r, 0, 0.5*pi, false);
-	ctx.lineTo(hps + r, h2 + hh + 2*r);
-	ctx.arc(hps + r, h2 + hh + r, r, 0.5*pi, pi, false);
-	ctx.lineTo(hps, h2 + r);
-	ctx.stroke();
-	
-	ctx.beginPath();
-	ctx.arc(bw - (hw + hps - r), h3 - (hh + hps + r), r, pi, 1.5*pi, false);
-	ctx.lineTo(bw - (hps + r), h3 - (hh + hps + 2*r));
-	ctx.arc(bw - (hps + r), h3 - (hh + hps + r), r, 1.5*pi, 0, false);
-	ctx.lineTo(bw - (hps), h3 - (hps + r));
-	ctx.arc(bw - (hps+r), h3 - (hps + r), r, 0, 0.5*pi, false);
-	ctx.lineTo(bw - (hw + hps - 2*r), h3 - (hps));
-	ctx.arc(bw - (hw + hps - r), h3 - (hps+r), r, 0.5*pi, pi, false);
-	ctx.lineTo(bw - (hw + hps), h3 - (hh + hps + r));
-	ctx.stroke();
+	C.drawRoundedRect(20, hps, h2 + hps, hw, hh);
+	C.drawRoundedRect(20, bw - (hw + hps), h3 - (hh + hps), hw, hh);
 	
 	
 	// actions
 	
 	var aw = C.actionsWidth;
 	var as = C.actionsSpace;
+	var aw = C.actionsWidth;
+	var ah = C.actionsHeight;
 	
-	ctx.beginPath();
-	ctx.arc(as + r, h3 + as, r, pi, 1.5*pi, false);
-	ctx.lineTo(aw - (as + r), h3 + as - r);
-	ctx.arc(aw - as - r, h3 + as, r, 1.5*pi, 0, false);
-	ctx.lineTo(aw - as, h4 - (as + r));
-	ctx.arc(aw - (as + r), h4 - (as + r), r, 0, 0.5*pi, false);
-	ctx.lineTo(aw - (as + 2*r), h4 - as);
-	ctx.arc(as + r, h4 - (as+r), r, 0.5*pi, pi, false);
-	ctx.lineTo(as, h3 + as);
-	ctx.stroke();
+	C.drawRoundedRect(20, as, h3 + as, aw - 2*as, ah - 2*as);
 },
 
 // Draws the menu
@@ -154,6 +128,26 @@ drawMonsters : function () {
 // Draws the enemy choice
 drawEnemyChoice : function () {
 
+},
+
+drawRoundedRect : function (r, startx, starty, width, height) {
+	var ctx = C.ctx;
+	var pi = C.pi;
+	var x = startx;
+	var y = starty;
+	var w = width;
+	var h = height;
+	
+	ctx.beginPath();
+	ctx.arc(x + r, y + r, r, pi, 1.5*pi, false);
+	ctx.lineTo(x + w - r, y);
+	ctx.arc(x + w - r, y + r, r, 1.5*pi, 0, false);
+	ctx.lineTo(x + w, y + h - r);
+	ctx.arc(x + w - r, y + h - r, r, 0, 0.5*pi, false);
+	ctx.lineTo(x + r, y + h);
+	ctx.arc(x + r, y + h - r, r, 0.5*pi, pi, false);
+	ctx.lineTo(x, y + r);
+	ctx.stroke();
 }
 
 }
