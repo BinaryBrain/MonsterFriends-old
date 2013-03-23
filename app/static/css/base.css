@@ -46,11 +46,27 @@ body {
 	width:800px;
 	margin-left:auto;
 	margin-right:auto;
+	padding:3px;
 	border:1px solid black;
 }
-
 
 #footer {
 	padding-top:20px;
 	padding-bottom:20px;
+}
+
+.monsterName {
+	font-weight:bold;
+}
+
+.trainerName {
+	font-decoration:underline;
+}
+
+.abilityName{
+	font-style:italic;
+}
+
+.number{
+	font-weight:bold;
 }
