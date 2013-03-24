@@ -2,22 +2,9 @@ var socket = io.connect();
 
 Network = {
   init: function (cb) {
+    Network.initCB = cb
     socket.on('connect', function (data) {
       Network.myid = socket.socket.sessionid;
-      
-      console.log("Connected");
-      
-      socket.emit('hello', "1236701567" /*Facebook.getUserID()*/ );
-
-      socket.on('error', function (err) { Controller.error(err); })
-
-      socket.on('welcome', function () {
-        cb()
-        
-        socket.on('new_fight', function (oid) {
-          Controller.newFight(oid);
-        })
-      })
     });
 
     socket.on('disconnect', function () {
@@ -77,5 +64,19 @@ Network = {
 
   attack: function (aid) {
     socket.emit('attack', aid );
+  },
+
+  facebookReady: function (fbid) {
+    socket.emit('hello', "1236701567" /*Facebook.getUserID()*/ );
+
+    socket.on('error', function (err) { Controller.error(err); })
+
+    socket.on('welcome', function () {
+      Network.initCB()
+      
+      socket.on('new_fight', function (oid) {
+        Controller.newFight(oid);
+      })
+    })
   },
 }
