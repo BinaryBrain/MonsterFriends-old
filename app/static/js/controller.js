@@ -44,7 +44,7 @@ Controller = {
 				// TODO : Confirmer la réception de la réponse
 				var result = data;
 				Controller.changeScene(Scene.FIGHT);
-			}
+			});
 	},
 	
 	sendChosenFriend: function(fid) {
@@ -53,7 +53,7 @@ Controller = {
 				// TODO : Confirmer la réception de la réponse
 				var result = data;
 				Controller.changeScene(Scene.FIGHT);
-			}
+			});
 	},
 	
 	changeScene: function(scene) {
