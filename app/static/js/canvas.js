@@ -25,7 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					// C.drawEnemyChoice();
+					C.drawEnemyChoice();
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -200,6 +200,9 @@ drawHistory : function (data) {
 // Draws the monsters 
 drawMonsters : function (data) {
 
+	console.log(data[0]);
+	console.log(data[0]["fb_id"]);
+	
 	var spaces = 10;
 	var margin = 10;
 	var sumHeights = C.ch - 7*spaces;
@@ -218,10 +221,12 @@ drawMonsters : function (data) {
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
-		var level = data[i].level;
-		var hpMax = data[i].pv_max;
-		var hp = data[i].pv;
+		var fbid = data[0].fb_id;
+		console.log(fbid);
+		imgFile.src = 'http://graph.facebook.com/' + fbid + '/picture';
+		var level = data[0].level;
+		var hpMax = data[0].pv_max;
+		var hp = data[0].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
 	}
@@ -244,13 +249,22 @@ drawEnemyChoice : function () {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	var trainers = ['kdousse']; // Todo
+	var trainers = ['kdousse','basile.vu1']; // Todo
+	
+	
+	
+	$('#content').append('<div id="peopleGrid"></div>');
+	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });
 	
 	for (var i = 0; i<trainers.length; i++) {
-		C.ctx.drawImage(C.lp2, (horSpace + width)*(i%5) + horSpace, (verSpace + height)*(Math.floor(i/5)) + h2 + verSpace);
+		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
+		$('#peopleGrid').append(s);
 	}
 	
-	//$(
+	$("#peopleGrid").on('click',"img", function () {
+		var _id = $(this).attr("data-id");
+		Controller.sendChosenFriend(_id);
+	})
 	
 	
 },
@@ -386,6 +400,8 @@ drawHpBar : function (x, y, w, h, hp, hpMax) {
 // The function used to clear the canvas
 clear : function () {
 	C.ctx.clearRect(0,0,C.cw, C.ch);
+	C.unbindButtons();
+	$('#peopleGrid').remove();
 },
 
 drawConnectionRequired: function () {
