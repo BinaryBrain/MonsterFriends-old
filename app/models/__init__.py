@@ -106,32 +106,32 @@ class Monster(db.Model):
                         'id': self.atk1.id,
                         'dmg': self.atk1.dmg,
                         'type': self.atk1.type,
-                        'pp_max': self.atk1.pp,
-                        'pp': self.atk1.pp
+                        'pp_max': self.atk1.pp_max,
+                        'pp': self.atk1.pp_max
                     },
                     {
                         'name': self.atk2.name,
                         'id': self.atk2.id,
                         'dmg': self.atk2.dmg,
                         'type': self.atk2.type,
-                        'pp_max': self.atk2.pp,
-                        'pp': self.atk2.pp
+                        'pp_max': self.atk2.pp_max,
+                        'pp': self.atk2.pp_max
                     },
                     {
                         'name': self.atk3.name,
                         'id': self.atk3.id,
                         'dmg': self.atk3.dmg,
                         'type': self.atk3.type,
-                        'pp_max': self.atk3.pp,
-                        'pp': self.atk3.pp
+                        'pp_max': self.atk3.pp_max,
+                        'pp': self.atk3.pp_max
                     },
                     {
                         'name': self.atk4.name,
                         'id': self.atk4.id,
                         'dmg': self.atk4.dmg,
                         'type': self.atk4.type,
-                        'pp_max': self.atk4.pp,
-                        'pp': self.atk4.pp
+                        'pp_max': self.atk4.pp_max,
+                        'pp': self.atk4.pp_max
                     }
                 ]
         }
