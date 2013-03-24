@@ -62,14 +62,7 @@ Network = {
   },
 	
 	setChosenAttack: function (aid, cb) {
-    socket.emit('use_attack', aid);
-    socket.on('fight_info', function (data) {
-      cb(data);
-    });
-  },
-	
-	setChosenFriend: function (fid, cb) {
-    socket.emit('fight_friend', fid);
+    socket.emit('attack', aid);
     socket.on('fight_info', function (data) {
       cb(data);
     });

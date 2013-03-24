@@ -48,7 +48,7 @@ Controller = {
 	},
 	
 	sendChosenFriend: function(fid) {
-		Network.setChosenFriend(fid, 
+		Network.askFight(fid, 
 			function (data) {
 				// TODO : Confirmer la réception de la réponse
 				var result = data;
