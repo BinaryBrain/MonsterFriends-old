@@ -247,7 +247,7 @@ drawMonsters : function (data) {
 
 // Draws the enemy choice
 drawEnemyChoice : function (data) {
-
+	data = JSON.parse(data);
     var buttonWidth = 200;
     var buttonHeight = 50;
 	C.ctx.font = "22px "+C.fontFamily;
