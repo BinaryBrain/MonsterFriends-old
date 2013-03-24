@@ -30,7 +30,7 @@ Controller = {
 		console.log("Error: "+err);
 		Console.show();
 		if (err=="Error: You're not in a fight, I can't send you the info...") {
-			Controller.changeScene(Scene.MENU);
+			Controller.changeScene(Scene.ENEMYCHOICE);
 		}
 	},
 

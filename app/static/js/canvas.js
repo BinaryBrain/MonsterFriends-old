@@ -423,6 +423,5 @@ drawAttackDialog: function (a1, a2, a3, a4, cb) {
 		C.drawButton(580, C.h3+70, 60, 42, a3.name, function () { cb(a3.id) });
 		C.drawButton(680, C.h3+70, 60, 42, a4.name, function () { cb(a4.id) });
 	})
-},
-
+  }
 }
