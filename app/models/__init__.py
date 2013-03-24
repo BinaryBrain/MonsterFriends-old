@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 *-*
 
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import desc, or_, and_
 from app.constant import TYPES
 
 
@@ -19,6 +20,26 @@ class Fight(db.Model):
     fb_id2 = db.Column(db.Integer, db.ForeignKey('user.fb_id'))
 
     result = db.Column(db.Boolean) # True if fb_id1 win, False otherwise, null otherwise
+
+    def __init__(self, fb_id1, fb_id2, result=None):
+        self.fb_id1, self.fb_id2 = min(fb_id1, fb_id2), max(fb_id1, fb_id2)
+        self.result = result
+
+    def set_winner(self, winner_id):
+        self.result = self.fb_id1 == winner_id
+
+    @staticmethod
+    def get_last_fight_of(fb_id, eid=None):
+        if eid is not None:
+            construct = or_(and_(Fight.fb_id1 == fb_id, Fight.fb_id2 == eid),
+                            and_(Fight.fb_id2 == fb_id, Fight.fb_id1 == eid),)
+        else:
+            construct = or_(Fight.fb_id1 == fb_id, Fight.fb_id2 == fb_id)
+
+        return Fight.query.distinct()\
+            .filter_by(construct)\
+            .order_by(desc(Fight.id))\
+            .first()
 
     def who_won(self):
         return self.fb_id1 if self.result else self.fb_id2

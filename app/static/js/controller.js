@@ -94,15 +94,17 @@ Controller = {
 				Facebook.getFriends(
 					function (data) {
 						var ids=[];
+						var names=[];
 						
-						for(var i=0, len=data.friends.length; i<len; i++) {
-							ids[i] = data.friends[i].id
+						for(var i=0, len=data.length; i<len; i++) {
+							ids[i] = data[i].id;
+							names[i] = data[i].name;
 						}
 						
-						Network.getAvailableFriends(ids, function (data) {
-							// TODO : Give arguments to drawEnemyChoice
-							C.drawEnemyChoice(data);
-						})
+						console.log(data);
+						
+						// TODO : Give arguments to drawEnemyChoice
+						C.drawEnemyChoice(data);
 					}
 				);
 				//drawEnemyChoice();
@@ -132,6 +134,7 @@ Controller = {
 	}
 	
 	
+	
 }
 
 
@@ -142,6 +145,14 @@ Controller = {
  * 
  */
 Console = {
+	/*
+	archieveHistory: function (data) {
+		for (var i = 0; i < data.length; i++) {
+			
+		}
+	},
+	*/
+
 	hide: function () {
 		this.consoleNode.hide();
 	},

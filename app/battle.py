@@ -8,7 +8,7 @@ import json
 
 from socketio.namespace import BaseNamespace
 from gevent import monkey
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 
 from models import User, Monster, Attak, db, Fight
 
@@ -42,17 +42,22 @@ class DatabaseBattle(object):
         self.db = db_conn
 
     def in_a_fight(self, fbid):
-        return self.r.get("f:h:{fbid}".format(fbid=fbid)) is not None
+        return self.r.get("f:c:{fbid}".format(fbid=fbid)) is not None
 
     def add_new_fight(self, fbid, eid, info_dict):
         self.r.set("f:c:{fbid}".format(fbid=fbid), eid)
         self.r.set("f:c:{eid}".format(eid=eid), fbid)
 
+        with app.app_context():
+            f = Fight(fbid, eid, None)
+            db.session.add(f)
+            db.session.commit()
+
         fid = self._get_formated_id(fbid, eid)
 
-        self.r.set("f:c:{fid}".format(fid=fid), json.dumps(info_dict))
+        self.r.set("f:c:b:{fid}".format(fid=fid), json.dumps(info_dict))
 
-    def remove_fight(self, fbid, eid=None):
+    def end_fight(self, fbid, result, eid=None):
         if eid is None:
             eid = self.r.get("f:c:{fbid}".format(fbid))
 
@@ -62,35 +67,31 @@ class DatabaseBattle(object):
         self.r.delete("f:c:b:{id}".format(id=fid))
         self.r.delete("f:c:{eid}".format(eid=eid))
 
+        with app.app_context():
+            f = Fight.get_last_fight_of(fbid, eid)
+            if f and f.result is None:
+                f.set_winner(fbid if result else eid)
+                db.session.commit()
+
     def get_last_history(self, fbid):
 
         with app.app_context():
-            User.query.filter_by(fb_id=0).first().fights.all()
-
-        return self.r.lrange('f:h:r:{fbid}'.format(fbid=fbid), 0, 10) or []
-
-    def add_game_result(self, fbid, eid, result):
-
-        with app.app_context():
-            f = Fight(fbid, eid, result)
-            db.session.add(f)
-            db.session.commit()
-
-        # self.r.lpush("f:h:r:{fbid}".format(fbid=fbid), json.dumps((eid, result)))
-        # self.r.lpush("f:h:r:{eid}".format(eid=eid), json.dumps((fbid, not result)))
+            u = User.query.filter_by(fb_id=fbid).first()
+            if u is not None:
+                return u.fights.order_by(desc(Fight.id)).limit(10).all()
 
     def get_current_fight_info(self, fbid):
         eid = self.r.get("f:c:{fbid}".format(fbid=fbid))
         fid = self._get_formated_id(fbid, eid)
 
-        info = self.r.hgetall("f:c:{id}".format(id=fid))
+        info = self.r.hgetall("f:c:b:{id}".format(id=fid))
         return info
 
     def update_fight_info(self, fbid, info_dict):
         eid = self.r.get("f:c:{fbid}".format(fbid=fbid))
         fid = self._get_formated_id(fbid, eid)
 
-        self.r.set("f:c:{fid}".format(fid=fid), json.dumps(info_dict))
+        self.r.set("f:c:b:{fid}".format(fid=fid), json.dumps(info_dict))
 
 
     def _get_formated_id(self, fbid, eid):
@@ -163,12 +164,6 @@ class BattleNamespace(BaseNamespace):
             self.emit('error', "Your opponent is already in a fight")
             return True
 
-        self.emit("ok_fight")
-
-        s = self.get_socket_with_fbid(eid)
-        if s:
-            s.emit("new_fight", self.fbid)
-
         info_dict = {}
 
         monster_1 = Monster.query.filter_by(belong_to=self.fbid).first()
@@ -184,6 +179,13 @@ class BattleNamespace(BaseNamespace):
             }
 
         self.r.add_new_fight(self.fbid, eid, info_dict)
+
+        self.emit("ok_fight")
+
+        s = self.get_socket_with_fbid(eid)
+        if s:
+            s.emit("new_fight", self.fbid)
+
         return True
 
     def on_get_fight_info(self):
@@ -238,7 +240,7 @@ class BattleNamespace(BaseNamespace):
         self.r.update_fight_info(self.fbid, current_info)
 
         if opponent_monster["pv"] <= 0:
-            self.r.remove_fight(self.fbid, eid)
+            self.r.end_fight(self.fbid, True, eid)
 
         s = self.get_socket_with_fbid(eid)
         if s is not None:
@@ -264,9 +266,10 @@ class BattleNamespace(BaseNamespace):
 
         with app.app_context():
             user = User.query.filter_by(fb_id=self.fbid).first()
+            monsters = user.monsters.get_stats() or []
         if user is None:
             self.emit("error", "You're not in our database. This is a problem. Please contact us.")
             return False
 
-        self.emit("monsters", json.dumps(user.monsters or []))
+        self.emit("monsters", json.dumps(monsters))
 

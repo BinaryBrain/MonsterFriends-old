@@ -3,7 +3,10 @@ var userID;
 var gender;
 
 window.fbAsyncInit = function() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94172c7240cc617046ebb0512da941f2cb9be6ac
   FB.init({
     appId      : '286327544834291', // App ID
     status     : true, // check login status
