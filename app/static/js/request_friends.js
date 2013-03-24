@@ -1,4 +1,4 @@
-function checkNo(renderMFS){
+function requestFriends(renderMFS){
                  FB.api('/me/friends?fields=installed', function(response){
                  		for(var i = 0; i < response.data.length; i++){
                  			if(response.data[i].installed !== undefined){
