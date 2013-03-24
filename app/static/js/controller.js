@@ -36,7 +36,7 @@ Controller = {
 				Network.getCurrentFight(
 					function (data) {
 						// TODO : Recevoir l'oid
-						var result = $.getJSON("../temp/fightInfos.json");
+						var result = data;
 						alert(result);
 						drawMenu(result);
 					}
@@ -44,14 +44,19 @@ Controller = {
 			break;
 			
 			case Scene.FIGHT:
-				Console.show();
+				// Temporary part
+				Console.show()
+				C.drawFight($.getJSON("../temp/fightInfos.json"));
+				/*
 				Network.getFightInfos(
+					
 					function(data) {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
-						var result = data;
+						var result = $.getJSON("../temp/fightInfos.json");
 						drawFight(result);
 					}
-				);
+					
+				); */
 			break;
 			
 			case Scene.ENEMYCHOICE:
