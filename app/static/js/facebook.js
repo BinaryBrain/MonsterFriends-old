@@ -1,6 +1,7 @@
 Facebook = {
   userID: 0,
   myname: 0,
+  val: [],
   friendsP: [],
 
   getFriends: function(cb){
