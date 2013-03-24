@@ -266,18 +266,14 @@ drawEnemyChoice : function () {
 	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });
 	
 	for (var i = 0; i<trainers.length; i++) {
-		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
+		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" onclick="Controller.sendChosenFriend('+ trainers[i] +');" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
 		$('#peopleGrid').append(s);
 	}
 	
-	$("#peopleGrid").on('click',"img", function () {
-		console.log("fnu ?")M
-		var _id = $(this).attr("data-id");
-		Controller.sendChosenFriend(_id);
-		console.log("Friend id : " + _id);
-	})
 
     C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
+
+	
 },
 
 // Draws text in the dialog box
