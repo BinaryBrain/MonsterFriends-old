@@ -25,7 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					C.drawFight(); // change
+					C.drawMenu(); // change
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -46,10 +46,10 @@ init : function () {
 	C.h3 = C.h2 + C.battleHeight;
 	C.h4 = C.ch;
 	
-	C.drawTextDialog("Welcome to MonsterFriends!", "Do you want to play?", function () {
+	/*C.drawTextDialog("Welcome to MonsterFriends!", "Do you want to play?", function () {
 		C.drawButton(580, C.h3+50, 60, 42, "Yes", function () { console.log("Oui!") });
 		C.drawButton(680, C.h3+50, 60, 42, "No", function () { console.log("Non!") });
-	})
+	})*/
 },
 
 // function used to draw the game
@@ -150,28 +150,12 @@ drawFight : function () {
 
 // Draws the menu
 drawMenu : function (oid) {
-
-	C.fontSize = 20;
-	C.font = C.fontSize + 'pt ' + C.fontFamily;
-	
-	var ctx = C.ctx;
-	ctx.font = (C.font);
 	
 	var buttonWidth = 200;
-	var buttonHeight = 40;
-	var buttonVSpacing = 20;
-	
-	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
-	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing), buttonWidth, buttonHeight);
-	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing)*2, buttonWidth, buttonHeight);
-	ctx.textAlign="center";
-	var msg;
-	oid==0 ? msg='Fight un random péon' : msg='Fight '+oid;
-	ctx.fillText(msg, C.cw/2, buttonVSpacing+buttonHeight/2+8);
-	ctx.fillText('Résumé la vie', C.cw/2, buttonVSpacing*2+buttonHeight/2+8+buttonHeight);
-	ctx.fillText('Historique la vie', C.cw/2, buttonVSpacing*3+buttonHeight/2+8+buttonHeight*2);
-
-
+	var buttonHeight = 50;
+	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 - (buttonHeight + 20) , 200 , 50, "Fight", function () { Controller.changeScene(Scene.FIGHT); });
+	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2, 200 , 50, "Resume", function () { Controller.changeScene(Scene.MONSTERS); });
+	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "History", function () { Controller.changeScene(Scene.HISTORY); });
 	
 },
 
