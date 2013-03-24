@@ -14,6 +14,7 @@ from models import User, Monster, Attak, db
 from monsterfriends import app
 
 import logging
+logging.basicConfig(level=logging.DEBUG)
 
 monkey.patch_all()
 
@@ -170,7 +171,7 @@ class BattleNamespace(BaseNamespace):
             return True
 
         if not self.in_a_fight:
-            self.emit("error", "You're no in a fight, I can't send you the info...")
+            self.emit("error", "You're not in a fight, I can't send you the info...")
             return True
 
         current_info = self.r.get_current_fight_info(self.fbid)
