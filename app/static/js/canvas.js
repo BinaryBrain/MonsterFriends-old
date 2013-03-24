@@ -121,8 +121,8 @@ drawFight : function () {
 
 	
 	// hp bars and values
-	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, hp2, totHp2);
-	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, hp1, totHp1);
+	C.ctx.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, hp2, totHp2);
+	C.ctx.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, hp1, totHp1);
 	
 	
 	ctx.font = '16pt Calibri,Geneva,Arial';
