@@ -197,7 +197,22 @@ drawHistory : function (data) {
 // Draws the monsters 
 drawMonsters : function () {
 
+	var spaces = 10;
+	var margin = 10;
+	var sumHeights = C.ch - 7*spaces;
+	var containerWidth = C.cw - 2*margin;
+	var containerHeight = sumHeights/6;
+	var lp1Size = 50;
 	
+	var monsters = ['kdousse','basile.vu1','sacha.bron','luca.bron','',''];
+	
+	C.ctx.fillStyle = 'rgb(137,137,137)';
+	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
+	C.ctx.fillStyle = 'rgb(197,197,197)';
+	for (var i = 0; i< monsters.length;i++){
+		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
+		C.ctx.drawImage(C.lp1, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+	}
 
 },
 
