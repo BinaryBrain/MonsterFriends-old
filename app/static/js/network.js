@@ -8,20 +8,20 @@ Network = {
   
   getFightInfos: function (cb) {
     socket.emit('get_fight_info');
-    socket.on('fight_infos', function (data) {
+    socket.on('fight_info', function (data) {
       cb(data);
     });
   },
   
   getMatchHistory: function (cb) {
-    socket.emit('get_match_history');
+    socket.emit('get_history');
     socket.on('history', function (data) {
       cb(data);
     });
   },
   
   getMyMonsters: function (cb) {
-    socket.emit('get_my_monsters');
+    socket.emit('get_monsters');
     socket.on('monsters', function (data) {
       cb(data);
     });
@@ -34,12 +34,12 @@ Network = {
     });
   },
   
-  getAvaiableFriends: function (ids, cb) {
-    socket.emit('get_avaiable_friends', ids);
-    socket.on('avaiable_friends', function (data) {
-      cb(data);
-    });
-  },
+//  getAvaiableFriends: function (ids, cb) {
+//    socket.emit('get_avaiable_friends', ids);
+//    socket.on('avaiable_friends', function (data) {
+//      cb(data);
+//    });
+//  },
 
   attack: function (aid) {
     socket.emit('attack', aid );
