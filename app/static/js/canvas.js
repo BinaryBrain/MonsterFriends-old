@@ -262,7 +262,7 @@ drawEnemyChoice : function (data) {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	var trainers = jQuery.parseJSON(data);
+	var trainers = data;
 	console.log(data);
 	
 	
