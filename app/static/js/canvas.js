@@ -47,11 +47,6 @@ init : function () {
 	C.h4 = C.ch;
 	
 	C.ctx.strokeRect(0, 0, C.cw, C.ch);
-	
-	/*C.drawTextDialog("Welcome to MonsterFriends!", "Do you want to play?", function () {
-		C.drawButton(580, C.h3+50, 60, 42, "Yes", function () { console.log("Oui!") });
-		C.drawButton(680, C.h3+50, 60, 42, "No", function () { console.log("Non!") });
-	})*/
 },
 
 // function used to draw the game
@@ -375,7 +370,6 @@ drawRoundedRect : function (r, startx, starty, width, height) {
 
 // Draws hp bars
 drawHpBar : function (x, y, w, h, hp, hpMax) {
-	
 	var percent = hp/hpMax;
 	var ctx = C.ctx;
 	
