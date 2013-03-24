@@ -25,6 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
+					C.drawEnemyChoice();
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -209,17 +210,45 @@ drawMonsters : function (data) {
 	C.ctx.fillStyle = 'rgb(137,137,137)';
 	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
 	C.ctx.fillStyle = 'rgb(197,197,197)';
-	alert("fnu");
+
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		C.ctx.drawImage(C.lp1, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
-	alert("fnu2");
+
 },
 
 // Draws the enemy choice
 drawEnemyChoice : function () {
 
+	C.ctx.font = "22px "+C.fontFamily;
+	C.ctx.textAlign = "center";
+	C.ctx.fillText('Choose the trainer you want to fight !', C.cw/2, 50);
+	
+	var h1 = 0;
+	var h2 = h1 + 80;
+	
+	var totHeight = C.ch - h2;
+	var height = 50;
+	var width = 50;
+	var horSpace = (C.cw - width*5)/6;
+	var verSpace = (C.ch - h2 - height*5)/6
+	
+	/*var trainers = new Array (7);
+	var nRow = Math.ceil(trainers.length/5);
+	var nCol = 
+	console.log(nCol + " " + nRow);
+	
+	
+	for(var pages = 0; pages < trainers.length/25; pages++){
+		for (var i = 0; i< nRow; i++){
+			for (var j = 0; j < nCol; j++){
+				C.ctx.drawImage(C.lp2, horSpace*(j+1) + width*j, height*i + (i+1)*verSpace + h2);
+			}
+		}
+	}
+	console.log("Du fnu est produit");*/
+	
 },
 
 // Draws text in the dialog box
