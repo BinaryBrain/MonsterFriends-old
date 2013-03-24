@@ -45,7 +45,7 @@ Controller = {
 				var result = data;
 				Controller.changeScene(Scene.FIGHT);
 			}
-	}
+	},
 	
 	sendChosenFriend: function(fid) {
 		Network.setChosenFriend(fid, 
@@ -54,7 +54,7 @@ Controller = {
 				var result = data;
 				Controller.changeScene(Scene.FIGHT);
 			}
-	}
+	},
 	
 	changeScene: function(scene) {
 		Console.hide();
