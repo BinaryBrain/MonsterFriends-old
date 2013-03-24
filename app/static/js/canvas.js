@@ -218,7 +218,7 @@ drawMonsters : function (data) {
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		var imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
+		imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
 		var level = data[i].level;
 		var hpMax = data[i].pv_max;
 		var hp = data[i].pv;
