@@ -55,13 +55,6 @@ Network = {
     });
   },
   
-//  getAvaiableFriends: function (ids, cb) {
-//    socket.emit('get_avaiable_friends', ids);
-//    socket.on('avaiable_friends', function (data) {
-//      cb(data);
-//    });
-//  },
-
   attack: function (aid) {
     socket.emit('attack', aid );
   },
