@@ -28,6 +28,7 @@ Controller = {
 	error: function(err) {
 		Console.archieveMessage("Error: "+err);
 		console.log("Error: "+err);
+		Console.show();
 	},
 
 	init: function () {
