@@ -19,6 +19,10 @@ body {
 	background-color:#EEEEEE;
 }
 
+#canvas {
+	border: 1px solid black;
+}
+
 #header {
 	padding-top:10px;
 	padding-bottom:2px;
