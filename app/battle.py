@@ -266,9 +266,10 @@ class BattleNamespace(BaseNamespace):
 
         with app.app_context():
             user = User.query.filter_by(fb_id=self.fbid).first()
+            monsters = user.monsters or []
         if user is None:
             self.emit("error", "You're not in our database. This is a problem. Please contact us.")
             return False
 
-        self.emit("monsters", json.dumps(user.monsters or []))
+        self.emit("monsters", json.dumps(monsters))
 
