@@ -325,6 +325,10 @@ drawButton: function (x, y, w, h, text, callback) {
 	})
 },
 
+unbindButtons: function () {
+	$("#canvas").unbind('click')
+},
+
 // A very useful function to draw rectangle with curved angles
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
