@@ -29,9 +29,12 @@ Controller = {
 		Console.archieveMessage("Error: "+err);
 		console.log("Error: "+err);
 		Console.show();
+<<<<<<< HEAD
 		if (err=="Error: You're not in a fight, I can't send you the info...") {
 			Controller.changeScene(Scene.ENEMYCHOICE)
 		}
+=======
+>>>>>>> f7764a3ec3f195d00926698fb6af8b5be70aad5e
 	},
 
 	init: function () {
