@@ -142,12 +142,11 @@ Controller = {
  * 
  */
 Console = {
-
 	archieveHistory: function (data) {
 		for (var i = 0; i < data.length; i++) {
 			
 		}
-	}
+	},
 
 	hide: function () {
 		this.consoleNode.hide();
