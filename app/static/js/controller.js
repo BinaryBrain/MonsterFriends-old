@@ -85,7 +85,7 @@ Controller = {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
 						var result = data;
 						C.drawFight(result);
-						console.log(data);
+						console.log("fightinfo", data);
 						//C.drawAttackDialog();
 					}
 					
@@ -103,7 +103,7 @@ Controller = {
 							names[i] = data[i].name;
 						}
 						
-						console.log(data);
+						console.log("friends", data);
 						
 						// TODO : Give arguments to drawEnemyChoice
 						C.drawEnemyChoice(data);
