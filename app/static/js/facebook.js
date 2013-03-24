@@ -2,9 +2,7 @@ Facebook = {
   userID: 0,
   myname: 0,
   
-  getFriends: function (cb) {
-
-       requestFriends(renderMFS); 
+    getFriends(renderMFS);
 }
 
 function login() {
