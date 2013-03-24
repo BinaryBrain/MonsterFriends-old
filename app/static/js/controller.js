@@ -29,6 +29,9 @@ Controller = {
 		Console.archieveMessage("Error: "+err);
 		console.log("Error: "+err);
 		Console.show();
+		if (err=="Error: You're not in a fight, I can't send you the info...") {
+			Controller.changeScene(Scene.ENEMYCHOICE)
+		}
 	},
 
 	init: function () {
@@ -48,7 +51,7 @@ Controller = {
 	},
 	
 	sendChosenFriend: function(fid) {
-		Network.setChosenFriend(fid, 
+		Network.askFight(fid, 
 			function (data) {
 				// TODO : Confirmer la réception de la réponse
 				var result = data;
