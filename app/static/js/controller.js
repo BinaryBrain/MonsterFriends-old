@@ -13,7 +13,7 @@ $(function () {
 })
 
 // Different scenes
-Scene = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
+Scene = {MENU : 0, FIGHT : 1, ENEMYCHOICE : 2, HISTORY : 3, MONSTERS : 4}
 
 /*
  * Controller Object
@@ -37,20 +37,26 @@ Controller = {
 					function (data) {
 						// TODO : Recevoir l'oid
 						var result = data;
+						alert(result);
 						drawMenu(result);
 					}
 				);
 			break;
 			
 			case Scene.FIGHT:
-				Console.show();
+				// Temporary part
+				Console.show()
+				C.drawFight($.getJSON("../temp/fightInfos.json"));
+				/*
 				Network.getFightInfos(
+					
 					function(data) {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
-						var result = data;
+						var result = $.getJSON("../temp/fightInfos.json");
 						drawFight(result);
 					}
-				);
+					
+				); */
 			break;
 			
 			case Scene.ENEMYCHOICE:

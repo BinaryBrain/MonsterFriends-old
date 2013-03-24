@@ -1,5 +1,3 @@
-var socket = io.connect();
-
 Network = {
   getCurrentFight: function (cb) {
     socket.emit('get_current_fight');
@@ -43,10 +41,12 @@ Network = {
     });
   },
 
-  attack: function (fid, aid) {
-    socket.emit('attack', { fid: fid, aid: aid });
+  attack: function (aid) {
+    socket.emit('attack', aid );
   },
 }
+
+var socket = io.connect();
 
 socket.on('connect', function (data) {
   Network.myid = socket.socket.sessionid;
