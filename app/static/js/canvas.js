@@ -163,7 +163,7 @@ drawMenu : function (oid) {
 		});
 	}
 	
-	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2, 200 , 50, "Resume", function () { Controller.changeScene(Scene.MONSTERS); });
+	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2, 200 , 50, "My team", function () { Controller.changeScene(Scene.MONSTERS); });
 	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "History", function () { Controller.changeScene(Scene.HISTORY); });
 	
 },
