@@ -247,6 +247,8 @@ drawMonsters : function (data) {
 
 // Draws the enemy choice
 drawEnemyChoice : function (data) {
+	console.log("poney")
+	
 	var buttonWidth = 200;
 	var buttonHeight = 50;
 	C.ctx.font = "22px "+C.fontFamily;
@@ -272,6 +274,7 @@ drawEnemyChoice : function (data) {
 		$('#peopleGrid').append(s);
 	}
 	
+						console.log("lolwut")
 
     //C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
 
