@@ -273,6 +273,7 @@ drawEnemyChoice : function () {
 	$("#peopleGrid").on('click',"img", function () {
 		var _id = $(this).attr("data-id");
 		Controller.sendChosenFriend(_id);
+		console.log("Friend id : " + _id);
 	})
 
     C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
