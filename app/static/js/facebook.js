@@ -25,8 +25,7 @@ function testAPI() {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '312224588840695', // App ID
-    channelUrl : 'fb/channel.html', // Channel File
+    appId      : '286327544834291', // App ID
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
