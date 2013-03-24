@@ -25,7 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					C.drawEnemyChoice();
+					// C.drawEnemyChoice();
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -234,20 +234,12 @@ drawEnemyChoice : function () {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	/*var trainers = new Array (7);
-	var nRow = Math.ceil(trainers.length/5);
-	var nCol = 
-	console.log(nCol + " " + nRow);
+	var trainers = new Array (7);
 	
-	
-	for(var pages = 0; pages < trainers.length/25; pages++){
-		for (var i = 0; i< nRow; i++){
-			for (var j = 0; j < nCol; j++){
-				C.ctx.drawImage(C.lp2, horSpace*(j+1) + width*j, height*i + (i+1)*verSpace + h2);
-			}
-		}
+	for (var i = 0; i<trainers.length; i++) {
+		C.ctx.drawImage(C.lp2, (horSpace + width)*(i%5) + horSpace, (verSpace + height)*(Math.floor(i/5)) + h2);
 	}
-	console.log("Du fnu est produit");*/
+	
 	
 },
 
@@ -299,6 +291,7 @@ drawTextDialog: function (line1, line2, callback) {
 	drawLines(0, line1, line2);
 },
 
+// A function used to draw buttons
 drawButton: function (x, y, w, h, text, callback) {
 	var m = 10;
 	
@@ -328,6 +321,7 @@ drawButton: function (x, y, w, h, text, callback) {
 	})
 },
 
+// A very useful function to draw rectangle with curved angles
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
 	var pi = C.pi;

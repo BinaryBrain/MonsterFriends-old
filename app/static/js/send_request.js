@@ -5,16 +5,16 @@ $(function(){
 	              method  : 'apprequests',
 	              max_recipients:1,
 	              message : $(this).attr('data-message')
-	            },
-	            function (response) {
-	              // If response is null the user canceled the dialog
-	              if (response != null) {
-	                logResponse(response);
-	              }
-	            }
-	          );
-	        });
+	            },requestCallback);
 	      });
+
+        function requestCallback(response) {
+            // If response is null the user canceled the dialog
+            if (response != null) {
+                logResponse(response);
+            }
+        }
+    });
 
 
 /*	Add this anchor
