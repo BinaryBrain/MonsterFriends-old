@@ -218,10 +218,10 @@ drawMonsters : function (data) {
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
-		var level = data[i].level;
-		var hpMax = data[i].pv_max;
-		var hp = data[i].pv;
+		imgFile.src = 'http://graph.facebook.com/' + data[0].fb_id + '/picture';
+		var level = data[0].level;
+		var hpMax = data[0].pv_max;
+		var hp = data[0].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
 	}
