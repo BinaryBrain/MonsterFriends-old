@@ -378,6 +378,21 @@ drawHpBar : function (x, y, w, h, hp, hpMax) {
 // The function used to clear the canvas
 clear : function () {
 	C.ctx.clearRect(0,0,C.cw, C.ch);
-}
+},
+
+drawConnectionRequired: function () {
+	C.ctx.clear()
+	C.ctx.save()
+	C.ctx.translate(400, 20)
+	
+	C.ctx.font = "22px "+C.fontFamily;
+	C.ctx.fillStyle = "black";
+	C.ctx.textAlign = "center";
+	C.ctx.textBaseline = "top";
+	
+	C.ctx.fillText("You have to be connected with Facebook to play.", 0, 0, 800);
+	
+	C.ctx.restore()
+},
 
 }

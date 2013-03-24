@@ -3,15 +3,6 @@ var userID;
 var gender;
 
 window.fbAsyncInit = function() {
-<<<<<<< Updated upstream
-		        FB.init({
-		          appId      : '286327544834291', // App ID
-		          status     : true, // check login status
-		          cookie     : true, // enable cookies to allow the server to access the session
-		          frictionlessRequests: true,
-		          xfbml      : true // parse XFBML
-        		});
-=======
   FB.init({
     appId      : '286327544834291', // App ID
     status     : true, // check login status
@@ -19,7 +10,6 @@ window.fbAsyncInit = function() {
     frictionlessRequests: true,
     xfbml      : true // parse XFBML
   });
->>>>>>> Stashed changes
 
   FB.getLoginStatus(function(response) {
     if ((response.status) && (response.status=='connected')) {
