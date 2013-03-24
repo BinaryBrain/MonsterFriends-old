@@ -395,7 +395,8 @@ drawHpBar : function (x, y, w, h, hp, hpMax) {
 // The function used to clear the canvas
 clear : function () {
 	C.ctx.clearRect(0,0,C.cw, C.ch);
-<<<<<<< HEAD
+	C.unbindButtons();
+	$('#peopleGrid').remove();
 },
 
 drawConnectionRequired: function () {
@@ -421,10 +422,5 @@ drawAttackDialog: function (a1, a2, a3, a4, cb) {
 		C.drawButton(680, C.h3+70, 60, 42, a4.name, function () { cb(a4.id) });
 	})
 },
-=======
-	C.unbindButtons();
-	$('#peopleGrid').remove();
-}
->>>>>>> Done clickable friends.
 
 }
