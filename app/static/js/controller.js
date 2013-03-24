@@ -26,6 +26,11 @@ Controller = {
 	// Starting scene
 	scene: Scene.MENU,
 	
+	error: function(err) {
+		Console.archieveMessage(err);
+		console.log(err);
+	}
+	
 	changeScene: function(scene) {
 		Console.hide();
 		this.scene = scene;
@@ -50,7 +55,7 @@ Controller = {
 					
 					function(data) {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
-						var result = $.getJSON("../temp/fightInfos.json");
+						var result = data;
 						C.drawFight(result);
 					}
 					
