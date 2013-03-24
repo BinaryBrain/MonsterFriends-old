@@ -15,7 +15,7 @@ redis = Redis()
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-from models import *
+from models import User,Monster, Attak, db
 db.init_app(app)
 
 monkey.patch_all()
@@ -23,7 +23,6 @@ monkey.patch_all()
 @app.route('/')
 def hello_world():
     return render_template('base.html')
-
 
 @app.route('/socket.io/<path:path>')
 def run_socketio(path):

@@ -24,6 +24,10 @@ window.fbAsyncInit = function() {
                       }
                   });
 
+                  function getUserID(){
+                  	return userID;
+                  }
+
                   function getDetails(userID){
 
                   $.getJSON('http://graph.facebook.com/' + userID, function(data){ 

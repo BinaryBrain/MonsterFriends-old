@@ -122,8 +122,30 @@ drawFight : function () {
 },
 
 // Draws the menu
-drawMenu : function () {
-	// TODO
+drawMenu : function (oid) {
+
+	C.fontSize = 20;
+	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	
+	var ctx = C.ctx;
+	ctx.font = (C.font);
+	
+	var buttonWidth = 200;
+	var buttonHeight = 40;
+	var buttonVSpacing = 20;
+	
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing), buttonWidth, buttonHeight);
+	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing)*2, buttonWidth, buttonHeight);
+	ctx.textAlign="center";
+	var msg;
+	oid==0 ? msg='Fight un random péon' : msg='Fight '+oid;
+	ctx.fillText(msg, C.cw/2, buttonVSpacing+buttonHeight/2+8);
+	ctx.fillText('Résumé la vie', C.cw/2, buttonVSpacing*2+buttonHeight/2+8+buttonHeight);
+	ctx.fillText('Historique la vie', C.cw/2, buttonVSpacing*3+buttonHeight/2+8+buttonHeight*2);
+
+
+	
 },
 
 // Just a simple notification or something to draw on the current screen
