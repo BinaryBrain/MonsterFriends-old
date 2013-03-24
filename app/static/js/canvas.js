@@ -199,8 +199,8 @@ drawHistory : function (data) {
 // Draws the monsters 
 drawMonsters : function (data) {
 
-    var buttonWidth = 200;
-    var buttonHeight = 50;
+  var buttonWidth = 200;
+  var buttonHeight = 50;
 	var spaces = 10;
 	var margin = 10;
 	var sumHeights = C.ch - 7*spaces;
@@ -232,7 +232,7 @@ drawMonsters : function (data) {
 		C.ctx.font = "14px "+C.fontFamily;
 		C.ctx.fillText(data[i].attack+' Attack', 300+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].defense+' Defense', 300+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
-		C.ctx.fillText(data[i].atks+' S.Atk', 380+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].atk_spe+' S.Atk', 380+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].def_spe+' S.Def', 380+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].speed+' Speed', 460+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].pv+'/'+data[i].pv_max+' HP', 140+margin*2, 22+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
