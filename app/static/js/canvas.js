@@ -223,7 +223,7 @@ drawMonsters : function (data) {
 		C.ctx.font = "22px "+C.fontFamily;
 		C.ctx.fillText('Level '+level, 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.font = "14px "+C.fontFamily;
-		C.ctx.fillText('Attack '+data[i]., 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText('Attack', 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
 	
 	for (var i = 0; i< data.length;i++) {
