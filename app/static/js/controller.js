@@ -86,7 +86,9 @@ Controller = {
 						var result = data;
 						C.drawFight(result);
 						console.log("fightinfo", data);
-						//C.drawAttackDialog();
+						//C.drawAttackDialog(, function (aid) {
+						//	sendChosenAttack(aid)
+						//});
 					}
 					
 				);
@@ -128,7 +130,7 @@ Controller = {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
 						console.log(result);
-						C.drawMonsters(result);
+						C.drawMonsters(JSON.parse(result));
 					}
 				);
 				//drawMonsters();
