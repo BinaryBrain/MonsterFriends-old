@@ -1,23 +1,30 @@
 var socket = io.connect();
 
 Network = {
+  getCurrentFight: function (cb) {
+    socket.emit('get_current_fight')
+    socket.on('current_fight', function (data) {
+      cb(data)
+    })
+  },
+  
+  getFightInfos: function (cb) {
+    socket.emit('get_fight_infos')
+    socket.on('fight_infos', function (data) {
+      cb(data)
+    })
+  },
+  
   getMatchHistory: function (cb) {
     socket.emit('get_match_history')
     socket.on('history', function (data) {
       cb(data)
     })
   },
-
+  
   getMyMonsters: function (cb) {
     socket.emit('get_my_monsters')
     socket.on('monsters', function (data) {
-      cb(data)
-    })
-  },
-  
-  getFriends: function (cb) {
-    socket.emit('get_friends')
-    socket.on('friends', function (data) {
       cb(data)
     })
   },
@@ -26,6 +33,13 @@ Network = {
     socket.emit('ask_fight', { oid: oid })
     socket.on('ok', function () {
       cb()
+    })
+  },
+  
+  getAvaiableFriends(ids, cb) {
+    socket.emit('get_avaiable_friends', { ids: ids })
+    socket.on('avaiable_friends', function (data) {
+      cb(data)
     })
   },
 
