@@ -7,9 +7,8 @@
 // Controls things. Yeah.
 
 $(function () {
-
 	Console.consoleNode = $("#console");
-	
+	Controller.init()
 })
 
 // Different scenes
@@ -29,6 +28,11 @@ Controller = {
 	error: function(err) {
 		Console.archieveMessage("Error: "+err);
 		console.log("Error: "+err);
+	},
+
+	init: function () {
+		C.init()
+		changeScene(Scene.MENU)
 	},
 	
 	changeScene: function(scene) {
