@@ -25,7 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					//C.drawEnemyChoice();
+					// C.drawEnemyChoice();
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -291,6 +291,7 @@ drawTextDialog: function (line1, line2, callback) {
 	drawLines(0, line1, line2);
 },
 
+// A function used to draw buttons
 drawButton: function (x, y, w, h, text, callback) {
 	var m = 10;
 	
@@ -320,6 +321,7 @@ drawButton: function (x, y, w, h, text, callback) {
 	})
 },
 
+// A very useful function to draw rectangle with curved angles
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
 	var pi = C.pi;
