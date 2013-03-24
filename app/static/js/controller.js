@@ -126,7 +126,7 @@ Controller = {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
 						console.log(result);
-						C.drawMonsters(result);
+						C.drawMonsters(JSON.parse(result));
 					}
 				);
 				//drawMonsters();

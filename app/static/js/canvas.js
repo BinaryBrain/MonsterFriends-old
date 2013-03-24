@@ -228,9 +228,14 @@ drawMonsters : function (data) {
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillStyle = 'rgb(0,0,0)';
 		C.ctx.font = "22px "+C.fontFamily;
-		C.ctx.fillText('Level '+level, 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText('Level '+level, 70+margin*2, 10 + containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.font = "14px "+C.fontFamily;
-		C.ctx.fillText('Attack', 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].attack+' Attack', 280+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].defense+' Defense', 280+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].attack+' S.Atk', 340+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].attack+' S.Def', 340+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].attack+' Speed', 400+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].pv+'/'+data[i].pv_max+' HP', 140+margin*2, 10+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
 	
 	for (var i = 0; i< data.length;i++) {
@@ -266,16 +271,14 @@ drawEnemyChoice : function () {
 	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });
 	
 	for (var i = 0; i<trainers.length; i++) {
-		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
+		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" onclick="Controller.sendChosenFriend('+ trainers[i] +');" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
 		$('#peopleGrid').append(s);
 	}
 	
-	$("#peopleGrid").on('click',"img", function () {
-		var _id = $(this).attr("data-id");
-		Controller.sendChosenFriend(_id);
-	})
 
     C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
+
+	
 },
 
 // Draws text in the dialog box
