@@ -93,6 +93,7 @@ Controller = {
 			case Scene.ENEMYCHOICE:
 				Facebook.getFriends(
 					function (data) {
+						data = JSON.parse(data);
 						var ids=[];
 						var names=[];
 						
