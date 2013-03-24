@@ -46,6 +46,8 @@ init : function () {
 	C.h3 = C.h2 + C.battleHeight;
 	C.h4 = C.ch;
 	
+	C.ctx.strokeRect(0, 0, C.cw, C.ch);
+	
 	/*C.drawTextDialog("Welcome to MonsterFriends!", "Do you want to play?", function () {
 		C.drawButton(580, C.h3+50, 60, 42, "Yes", function () { console.log("Oui!") });
 		C.drawButton(680, C.h3+50, 60, 42, "No", function () { console.log("Non!") });
@@ -234,11 +236,13 @@ drawEnemyChoice : function () {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	var trainers = new Array (7);
+	var trainers = ['kdousse']; // Todo
 	
 	for (var i = 0; i<trainers.length; i++) {
-		C.ctx.drawImage(C.lp2, (horSpace + width)*(i%5) + horSpace, (verSpace + height)*(Math.floor(i/5)) + h2);
+		C.ctx.drawImage(C.lp2, (horSpace + width)*(i%5) + horSpace, (verSpace + height)*(Math.floor(i/5)) + h2 + verSpace);
 	}
+	
+	//$(
 	
 	
 },
