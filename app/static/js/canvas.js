@@ -173,6 +173,9 @@ drawVictory : function () {
 
 // Draws the match history
 drawHistory : function (data) {
+
+    var buttonWidth = 200;
+    var buttonHeight = 50;
 	C.fontSize = 20;
 	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
 	
@@ -195,7 +198,9 @@ drawHistory : function (data) {
 
 // Draws the monsters 
 drawMonsters : function (data) {
-	
+
+    var buttonWidth = 200;
+    var buttonHeight = 50;
 	var spaces = 10;
 	var margin = 10;
 	var sumHeights = C.ch - 7*spaces;
@@ -238,6 +243,8 @@ drawMonsters : function (data) {
 // Draws the enemy choice
 drawEnemyChoice : function () {
 
+    var buttonWidth = 200;
+    var buttonHeight = 50;
 	C.ctx.font = "22px "+C.fontFamily;
 	C.ctx.textAlign = "center";
 	C.ctx.fillText('Choose the trainer you want to fight !', C.cw/2, 50);
