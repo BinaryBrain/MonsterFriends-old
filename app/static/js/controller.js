@@ -33,6 +33,7 @@ Controller = {
 	
 	changeScene: function(scene) {
 		Console.hide();
+		Canvas.clear();
 		this.scene = scene;
 		
 		switch(scene)
