@@ -240,7 +240,8 @@ class BattleNamespace(BaseNamespace):
             self.emit("error", "Hello has not been sent, I can't fetch your monsters book :(")
             return True
 
-        user = User.query.filter_by(fb_id=self.fbid).first()
+        with app.app_context():
+            user = User.query.filter_by(fb_id=self.fbid).first()
         if user is None:
             self.emit("error", "You're not in our database. This is a problem. Please contact us.")
             return False
