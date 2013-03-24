@@ -15,7 +15,7 @@ redis = Redis()
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-from models import *
+from models import User,Monster, Attak, db
 db.init_app(app)
 
 monkey.patch_all()
