@@ -247,8 +247,6 @@ drawMonsters : function (data) {
 
 // Draws the enemy choice
 drawEnemyChoice : function (data) {
-	console.log("poney")
-	
 	var buttonWidth = 200;
 	var buttonHeight = 50;
 	C.ctx.font = "22px "+C.fontFamily;
@@ -273,11 +271,7 @@ drawEnemyChoice : function (data) {
 		var s = '<img data-id="'+ trainers[i].id +'" id ="img'+i+'" onclick="Controller.sendChosenFriend("'+ trainers[i].id +'");" src = "http://graph.facebook.com/' + trainers[i].id + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
 		$('#peopleGrid').append(s);
 	}
-	
-						console.log("lolwut")
-
     //C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
-
 	
 },
 
