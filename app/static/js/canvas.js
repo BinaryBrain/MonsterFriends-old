@@ -210,7 +210,6 @@ drawMonsters : function (data) {
 	
 	var monsters = ['kdousse','basile.vu1','sacha.bron','luca.bron','',''];
 	
-	
 	C.ctx.fillStyle = 'rgb(137,137,137)';
 	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
 	C.ctx.fillStyle = 'rgb(197,197,197)';
