@@ -54,7 +54,7 @@ socket.on('connect', function (data) {
   alert(data);
   console.log(data);
   
-  socket.emit('hello', fbid: '1063020932');
+  socket.emit('hello', Facebook.getUserID());
 
   socket.on('error', function (err) { Controller.error(err); })
 
