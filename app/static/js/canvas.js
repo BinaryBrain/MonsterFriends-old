@@ -247,8 +247,8 @@ drawMonsters : function (data) {
 
 // Draws the enemy choice
 drawEnemyChoice : function (data) {
-    var buttonWidth = 200;
-    var buttonHeight = 50;
+	var buttonWidth = 200;
+	var buttonHeight = 50;
 	C.ctx.font = "22px "+C.fontFamily;
 	C.ctx.textAlign = "center";
 	C.ctx.fillText('Choose the trainer you want to fight !', C.cw/2, 50);
@@ -263,9 +263,6 @@ drawEnemyChoice : function (data) {
 	var verSpace = (C.ch - h2 - height*5)/6
 	
 	var trainers = data;
-	console.log(data);
-	
-	
 	
 	$('#content').append('<div id="peopleGrid"></div>');
 	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });

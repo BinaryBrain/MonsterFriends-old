@@ -93,6 +93,7 @@ Controller = {
 			case Scene.ENEMYCHOICE:
 				Facebook.getFriends(
 					function (data) {
+						console.log("poney")
 						var ids=[];
 						var names=[];
 						
@@ -118,6 +119,9 @@ Controller = {
 							id: 517796283,
 							name: "Jocelyn"
 						}];
+						
+						console.log(data)
+						console.log("lol")
 						
 						C.drawEnemyChoice(data);
 					}
