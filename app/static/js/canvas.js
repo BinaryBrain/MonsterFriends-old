@@ -312,7 +312,7 @@ drawButton: function (x, y, w, h, text, callback) {
 	
 	C.ctx.restore();
 	
-	$("#canvas").click(function (e) {
+	$("#canvas").bind('click', function (e) {
 		var ex = e.offsetX;
 		var ey = e.offsetY;
 		if(ex >= x && ex <= x+w && ey >= y && ey <= y+h) {
