@@ -193,7 +193,7 @@ drawHistory : function (data) {
 		// Afficher les données de l'historique
 	}
 
-    C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
+    //C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
 },
 
 // Draws the monsters 
@@ -242,7 +242,7 @@ drawMonsters : function (data) {
 		C.drawHpBar(70+margin*2, 30+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 200, 18, hp, hpMax);
 	}
 
-    C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
+    //C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
 },
 
 // Draws the enemy choice
@@ -276,7 +276,7 @@ drawEnemyChoice : function () {
 	}
 	
 
-    C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
+    //C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "Back", function () { Controller.changeScene(Scene.MENU); });
 
 	
 },
