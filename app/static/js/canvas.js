@@ -403,4 +403,13 @@ drawConnectionRequired: function () {
 	C.ctx.restore()
 },
 
+drawAttackDialog: function (a1, a2, a3, a4, cb) {
+	C.drawTextDialog("It's your turn", "Choose an attack:", function () {
+		C.drawButton(580, C.h3+10, 60, 42, a1.name, function () { cb(a1.id) });
+		C.drawButton(680, C.h3+10, 60, 42, a2.name, function () { cb(a2.id) });
+		C.drawButton(580, C.h3+70, 60, 42, a3.name, function () { cb(a3.id) });
+		C.drawButton(680, C.h3+70, 60, 42, a4.name, function () { cb(a4.id) });
+	})
+},
+
 }
