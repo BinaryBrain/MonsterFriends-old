@@ -9,13 +9,30 @@ db = SQLAlchemy()
 
 __all__ = ['User', 'Monster', 'Attak', 'db']
 
+
+class Fight(db.Model):
+    __tablename__ = 'fight'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    fb_id1 = db.Column(db.Integer, db.ForeignKey('user.fb_id'))
+    fb_id2 = db.Column(db.Integer, db.ForeignKey('user.fb_id'))
+
+    result = db.Column(db.Boolean) # True if fb_id1 win, False otherwise
+
+    def who_won(self):
+        return self.fb_id1 if self.result else self.fb_id2
+
 class User(db.Model):
 
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
-    fb_id = db.Column(db.BigInteger, unique=True)
+    fb_id = db.Column(db.BigInteger, primary_key=True)
     monsters = db.relationship("Monster")
+    fights = db.relationship("Fight", primaryjoin="or_(Fight.fb_id1==User.fb_id, Fight.fb_id2==User.fb_id)")
+
+    def __init__(self, fb_id):
+        self.fb_id = fb_id
 
 
 class Monster(db.Model):
@@ -39,7 +56,7 @@ class Monster(db.Model):
     atk3_id = db.Column(db.Integer, db.ForeignKey('attak.id'))
     atk4_id = db.Column(db.Integer, db.ForeignKey('attak.id'))
 
-    belong_to = db.Column(db.Integer, db.ForeignKey('user.id'))
+    belong_to = db.Column(db.Integer, db.ForeignKey('user.fb_id'))
 
 class Attak(db.Model):
 
@@ -51,4 +68,3 @@ class Attak(db.Model):
     dmg = db.Column(db.Integer)
     desc = db.Column(db.Text)
     pp = db.Column(db.Integer)
-

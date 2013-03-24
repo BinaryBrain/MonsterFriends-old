@@ -14,12 +14,12 @@ PORT = 5000
 
 
 @werkzeug.serving.run_with_reloader
-def runServer():
+def run_server():
     print 'Listening on %s...' % PORT
     ws = SocketIOServer(('0.0.0.0', PORT), app, resource="socket.io", policy_server=False)
     ws.serve_forever()
 
 
-runServer()
+run_server()
 
 
