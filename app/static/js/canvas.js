@@ -225,10 +225,11 @@ drawMonsters : function (data) {
 		var hpMax = data[0].pv_max;
 		var hp = data[0].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText('Level '+level, 70+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
 	
 	for (var i = 0; i< monsters.length;i++) {
-		C.drawHpBar(70+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 150, 20, hp, hpMax);
+		C.drawHpBar(70+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 150, 20, hp, hpMax);
 	}
 
 },
