@@ -2,6 +2,7 @@ Network = {
   getCurrentFight: function (cb) {
     socket.emit('get_current_fight');
     socket.on('current_fight', function (data) {
+      console.log(data)
       cb(data);
     });
   },

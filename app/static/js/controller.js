@@ -39,6 +39,7 @@ Controller = {
 		switch(scene)
 		{
 			case Scene.MENU:
+				console.log("menu")
 				Network.getCurrentFight(
 					function (data) {
 						// TODO : Recevoir l'oid
@@ -78,7 +79,7 @@ Controller = {
 						})
 					}
 				);
-				drawEnemyChoice();
+				//drawEnemyChoice();
 			break;
 			
 			case Scene.HISTORY:
@@ -99,7 +100,7 @@ Controller = {
 						C.drawMonsters(result);
 					}
 				);
-				drawMonsters();
+				//drawMonsters();
 			break;
 		}
 	}
