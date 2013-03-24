@@ -200,6 +200,9 @@ drawHistory : function (data) {
 // Draws the monsters 
 drawMonsters : function (data) {
 
+	console.log(data[0]);
+	console.log(data[0]["fb_id"]);
+	
 	var spaces = 10;
 	var margin = 10;
 	var sumHeights = C.ch - 7*spaces;
