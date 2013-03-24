@@ -60,6 +60,20 @@ Network = {
       cb();
     });
   },
+	
+	setChosenAttack: function (aid, cb) {
+    socket.emit('use_attack', aid);
+    socket.on('fight_info', function (data) {
+      cb(data);
+    });
+  },
+	
+	setChosenFriend: function (fid, cb) {
+    socket.emit('fight_friend', fid);
+    socket.on('fight_info', function (data) {
+      cb(data);
+    });
+  },
   
 //  getAvaiableFriends: function (ids, cb) {
 //    socket.emit('get_avaiable_friends', ids);

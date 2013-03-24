@@ -38,6 +38,24 @@ Controller = {
 		});
 	},
 	
+	sendChosenAttack: function(aid) {
+		Network.setChosenAttack(aid, 
+			function (data) {
+				// TODO : Confirmer la réception de la réponse
+				var result = data;
+				Controller.changeScene(Scene.FIGHT);
+			}
+	}
+	
+	sendChosenFriend: function(fid) {
+		Network.setChosenFriend(fid, 
+			function (data) {
+				// TODO : Confirmer la réception de la réponse
+				var result = data;
+				Controller.changeScene(Scene.FIGHT);
+			}
+	}
+	
 	changeScene: function(scene) {
 		Console.hide();
 		C.clear();
