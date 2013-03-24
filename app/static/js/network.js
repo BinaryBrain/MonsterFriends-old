@@ -67,7 +67,7 @@ Network = {
   },
 
   facebookReady: function (fbid) {
-    socket.emit('hello', Facebook.userID() );
+    socket.emit('hello', Facebook.userID);
 
     socket.on('error', function (err) { Controller.error(err); })
 
