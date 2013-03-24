@@ -32,8 +32,7 @@ Controller = {
 	},
 
 	init: function () {
-		C.init()
-		C.drawMenu();
+		C.init();
 		Network.init(function () {
 			Controller.changeScene(Scene.MENU);
 		});
