@@ -68,8 +68,8 @@ drawFight : function () {
 	ctx.fillText('vs', C.headWidth/2 - C.fontSize/2, C.headHeight/2);
 	
 	// players 
-	ctx.drawImage(C.p1, C.pBordSpace, C.h3-(C.pHeight + C.pBordSpace));
-	ctx.drawImage(C.p2, C.battleWidth-(C.pWidth + C.pBordSpace), C.h2 + C.pBordSpace);
+	ctx.drawImage(C.p1, C.pBordSpace + 50, C.h3-(C.pHeight + C.pBordSpace));
+	ctx.drawImage(C.p2, C.battleWidth-(C.pWidth + C.pBordSpace + 50), C.h2 + C.pBordSpace);
 	
 	var r = 20;
 	var vsw = C.vsWidth;
@@ -98,16 +98,17 @@ drawFight : function () {
 	C.drawRoundedRect(20, bw - (hw + hps), h3 - (hh + hps), hw, hh);
 	
 	// hp bars
-	
-	var hp1max = 300;
+	//test values
+	var totHp1 = 300;
 	var hp1 = 280;
+	var perHp1 = hp1/totHp1;
 	
-	var hp2 = 0.2;
+	var perHp2 = 1;
 	
 	
 	
-	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12);
-	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12);
+	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, perHp2);
+	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, perHp1);
 	
 	
 	// actions
@@ -193,11 +194,25 @@ drawRoundedRect : function (r, startx, starty, width, height) {
 	ctx.stroke();
 },
 
-drawHpBar : function (x, y, w, h) {
-
-	C.ctx.fillStyle = 'rgb(94,240,81)';
+drawHpBar : function (x, y, w, h, percent) {
+	
+	var ctx = C.ctx;
+	
+	if(percent > 0.5 ) {
+		C.ctx.fillStyle = 'rgb(148,240,59)';
+	}
+	else if (percent <= 0.5 && percent >= 0.2) {
+		C.ctx.fillStyle = 'rgb(255,200,59)';
+	}
+	else {
+		C.ctx.fillStyle = 'rgb(255,72,59)'
+	}
+	
+	ctx.clearRect(x, y, w, h);
 	C.drawRoundedRect(h/2, x, y, w, h);
-	C.ctx.fill();
+	C.drawRoundedRect((h-2)/2, x, y, w*percent, h);
+	ctx.fill();
+
 },
 
 clear : function () {
