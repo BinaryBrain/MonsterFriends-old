@@ -209,13 +209,21 @@ drawMonsters : function (data) {
 	
 	var monsters = ['kdousse','basile.vu1','sacha.bron','luca.bron','',''];
 	
+	
+	
 	C.ctx.fillStyle = 'rgb(137,137,137)';
 	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
 	C.ctx.fillStyle = 'rgb(197,197,197)';
 
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
-		C.ctx.drawImage(C.lp1, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		var imgFile = new Image();
+		var imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
+		var level = data[i].level;
+		var hpMax = data[i].pv_max;
+		var hp = data[i].pv;
+		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
 	}
 
 },
