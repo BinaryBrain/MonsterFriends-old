@@ -135,7 +135,6 @@ Controller = {
 }
 
 
-
 /*
  * Console Object
  *
@@ -182,6 +181,21 @@ Console = {
 	
 	turn: function (turnNumber) {
 		var msg= "<hr><span class='turnNumber'>Turn " + turnNumber + "</span>";
+		Console.archieveMessage(msg);
+	},
+
+	dead: function (monsterName) {
+		var msg= "<span class='monsterName'>" + monsterNumber + "</span> is K.O.";
+		Console.archieveMessage(msg);
+	},
+	
+	end: function () {
+		var msg= "The fight is over !";
+		Console.archieveMessage(msg);
+	},
+	
+	victory: function (userName) {
+		var msg= "<span class='monsterName'>" + userName + "</span> wins !";
 		Console.archieveMessage(msg);
 	}
 }
