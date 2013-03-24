@@ -195,7 +195,7 @@ drawHistory : function (data) {
 },
 
 // Draws the monsters 
-drawMonsters : function () {
+drawMonsters : function (data) {
 
 	var spaces = 10;
 	var margin = 10;
