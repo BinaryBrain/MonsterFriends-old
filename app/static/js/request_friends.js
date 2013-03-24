@@ -21,10 +21,10 @@ function requestFriends(renderMFS){
                                           var friendItem;
                                           if(response.data[i].id == val[j]){
 
-                                              friendItem = document.createElement('div');
+                                              friendItem = document.createElement('span');
                                               friendItem.innerHTML = '<input type="checkbox" name="friends" id="friends" value="'
                                                       + response.data[i].id
-                                                      + '" />' + response.data[i].name;
+                                                      + '" />' + response.data[i].name + "<br>";
 
                                               friendItem.id = 'friend_' + response.data[i].id;
 
