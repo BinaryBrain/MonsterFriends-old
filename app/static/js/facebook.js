@@ -46,7 +46,7 @@ function login() {
       } else {
 	  // cancelled
 	  console.log("Connection cancelled")
-	  C.drawConnectionRequired()
+	  //C.drawConnectionRequired()
       }
   });
 }
@@ -79,11 +79,11 @@ $(function () {
 	go()
       } else if (response.status === 'not_authorized') {
 	// not_authorized
-	C.drawConnectionRequired()
+	//C.drawConnectionRequired()
 	login()
       } else {
 	// not_logged_in
-	C.drawConnectionRequired()
+	//C.drawConnectionRequired()
 	login()
       }
     });
