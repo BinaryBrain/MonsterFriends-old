@@ -1,16 +1,17 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 *-*
-
 from flask import current_app
+
 from redis import Redis
 
 import json
 
 from socketio.namespace import BaseNamespace
-from socketio.mixins import RoomsMixin
 from gevent import monkey
 
 from models import User, Monster, Attak, db
+
+from monsterfriends import app
 
 monkey.patch_all()
 
@@ -30,10 +31,11 @@ monkey.patch_all()
 #             self.ctx.pop()
 #         super(BaseNamespace, self).disconnect(*args, **kwargs)
 
-class RedisBattle(object):
+class DatabaseBattle(object):
 
-    def __init__(self, redis_conn):
+    def __init__(self, redis_conn, db_conn):
         self.r = redis_conn
+        self.db = db_conn
 
     def in_a_fight(self, fbid):
         return self.r.get("f:h:{fbid}".format(fbid=fbid)) is not None
@@ -42,17 +44,27 @@ class RedisBattle(object):
         self.r.set("f:c:{fbid}".format(fbid=fbid), eid)
         self.r.set("f:c:{eid}".format(eid=eid), fbid)
 
+    def remove_fight(self, fbid, eid=None):
+        if eid is None:
+            eid = self.r.get("f:c:{fbid}".format(fbid))
+        self.r.delete("f:c:{fbid}".format(fbid))
+        self.r.delete("f:c:{eid}".format(eid))
+
     def get_last_history(self, fbid):
         return self.r.lrange('f:h:r:{fbid}'.format(fbid), 0, 10) or []
 
-class BattleNamespace(BaseNamespace):
+    def add_game_result(self, fbid, eid, result):
+        self.r.lpush("f:h:r:{fbid}".format(fbid), json.dumps((eid, result)))
+        self.r.lpush("f:h:r:{eid}".format(eid), json.dumps((fbid, not result)))
 
-    # TODO Gérer Redis !!!
+
+
+class BattleNamespace(BaseNamespace):
 
     def initialize(self):
         self.fbid = None
         self.eid = None
-        self.r = RedisBattle(Redis())
+        self.r = DatabaseBattle(Redis(), db)
 
     @property
     def in_a_fight(self):
@@ -70,11 +82,12 @@ class BattleNamespace(BaseNamespace):
 
     def on_hello(self, fbid):
         self.fbid = fbid
-        u = User.query.filter_by(fbid=self.fbid).first()
-        if u is None:
-            u = User(fbid)
-            db.session.add(u)
-            db.session.commit()
+        with app.app_context():
+            u = User.query.filter_by(fb_id=self.fbid).first()
+            if u is None:
+                u = User(self.fbid)
+                db.session.add(u)
+                db.session.commit()
         self.eid = self.in_a_fight
         self.emit("welcome")
         return True
@@ -120,7 +133,10 @@ class BattleNamespace(BaseNamespace):
             self.emit("error", "Hello has not been sent, I can't fetch your history :(")
             return True
 
-        user = User.query.filter_by(fbid=self.fbid).first()
+        user = User.query.filter_by(fb_id=self.fbid).first()
+        if user is None:
+            self.emit("error", "You're not in our database. This is a problem. Please contact us.")
+            return False
 
-        self.emit("monsters", json.dumps(user.monsters) or json.dumps([]))
+        self.emit("monsters", json.dumps(user.monsters or []))
 

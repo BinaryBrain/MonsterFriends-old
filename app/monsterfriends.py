@@ -5,7 +5,6 @@ from flask import Flask, request, render_template, Response
 from redis import Redis
 from socketio import socketio_manage
 from gevent import monkey
-from battle import BattleNamespace
 
 
 
@@ -18,7 +17,6 @@ app.config.from_pyfile('config.py')
 from models import User,Monster, Attak, db
 db.init_app(app)
 
-monkey.patch_all()
 
 @app.route('/')
 def hello_world():
@@ -26,6 +24,7 @@ def hello_world():
 
 @app.route('/socket.io/<path:path>')
 def run_socketio(path):
+    from battle import BattleNamespace
     real_request = request._get_current_object()
     socketio_manage(request.environ, {'': BattleNamespace},
                     request=real_request)
