@@ -24,7 +24,6 @@ monkey.patch_all()
 def hello_world():
     return render_template('base.html')
 
-
 @app.route('/socket.io/<path:path>')
 def run_socketio(path):
     real_request = request._get_current_object()
