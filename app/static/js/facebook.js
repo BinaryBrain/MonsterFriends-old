@@ -1,22 +1,8 @@
 // Additional JS functions here
-
-function login() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            // connected
-	    console.log("just connected")
-	    testAPI()
-        } else {
-            // cancelled
-	    console.log("canceled")
-        }
-    })
-}
-
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '286327544834291', // App ID
-    channelUrl : '//monsterfriends.no-ip.org:5000//channel.html', // Channel File
+    channelUrl : '//monsterfriends.no-ip.org:5000/channel.html', // Channel File
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
@@ -37,6 +23,20 @@ window.fbAsyncInit = function() {
       login()
     }
   })
+    
+  function login() {
+    console.log("login")
+    FB.login(function(response) {
+	if (response.authResponse) {
+	    // connected
+	    console.log("just connected")
+	    testAPI()
+	} else {
+	    // cancelled
+	    console.log("canceled")
+	}
+    })
+  }
 }
 
 // Load the SDK Asynchronously
@@ -49,8 +49,9 @@ window.fbAsyncInit = function() {
 }(document));
 
 function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.name + '.');
-    });
+  console.log('Welcome!  Fetching your information.... ');
+  FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+  });
 }
+
