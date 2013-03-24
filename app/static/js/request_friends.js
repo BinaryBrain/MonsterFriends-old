@@ -60,7 +60,7 @@ function requestFriends(renderMFS){
                                                     function (response) {
                                                         // If response is null the user canceled the dialog
                                                         if (response != null) {
-                                                                                                            }
+                                                          console.log(response);                     }
                                                     });
                                         }
                                     }

@@ -4,7 +4,7 @@ var gender;
 
 window.fbAsyncInit = function() {
 		        FB.init({
-		          appId      : '171644452987813', // App ID
+		          appId      : '286327544834291', // App ID
 		          status     : true, // check login status
 		          cookie     : true, // enable cookies to allow the server to access the session
 		          frictionlessRequests: true,

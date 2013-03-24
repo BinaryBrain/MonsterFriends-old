@@ -1,5 +1,5 @@
-var app_id = 171644452987813;
-var namespace = "funfunnier";
+var app_id = 286327544834291;
+var namespace = "epflmonsterfriends";
 var oauth_url = 'https://www.facebook.com/dialog/oauth/';
 var scope = "email,user_online_presence,friends_online_presence";
 
