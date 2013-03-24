@@ -110,6 +110,11 @@ class BattleNamespace(BaseNamespace):
 
     def on_hello(self, fbid):
         logging.debug("Receive hello from {}".format(fbid))
+
+        if fbid is None:
+            self.emit("error", "I need a Facebook ID to work !")
+            return True
+
         self.fbid = fbid
         with app.app_context():
             u = User.query.filter_by(fb_id=self.fbid).first()
@@ -133,7 +138,13 @@ class BattleNamespace(BaseNamespace):
         if self.fbid == eid:
             self.emit('error', "You can't fight against yourself...")
             return True
-        elif self.in_a_fight:
+
+        with app.app_context():
+            if User.query.filter_by(fb_id=eid).first() is None:
+                self.emit('error', "The user asked is not in the database. Ask him on Facebook ?")
+                return True
+
+        if self.in_a_fight:
             self.emit('error', "You're already in a fight.")
             return True
 
