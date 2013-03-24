@@ -85,6 +85,8 @@ Controller = {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
 						var result = data;
 						C.drawFight(result);
+						console.log(data);
+						//C.drawAttackDialog();
 					}
 					
 				);
@@ -125,8 +127,8 @@ Controller = {
 					function (data) {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
-						C.drawMonsters(result);
 						console.log(result);
+						C.drawMonsters(result);
 					}
 				);
 				//drawMonsters();

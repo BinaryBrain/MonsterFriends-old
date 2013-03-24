@@ -121,8 +121,8 @@ drawFight : function () {
 
 	
 	// hp bars and values
-	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, hp2, totHp2);
-	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, hp1, totHp1);
+	C.ctx.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, hp2, totHp2);
+	C.ctx.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, hp1, totHp1);
 	
 	
 	ctx.font = '16pt Calibri,Geneva,Arial';
@@ -218,12 +218,12 @@ drawMonsters : function (data) {
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		var imgFile.src = 'http://graph.facebook.com/' + data[i].fb_id + '/picture';
-		var level = data[i].level;
-		var hpMax = data[i].pv_max;
-		var hp = data[i].pv;
+		imgFile.src = 'http://graph.facebook.com/' + data[0].fb_id + '/picture';
+		var level = data[0].level;
+		var hpMax = data[0].pv_max;
+		var hp = data[0].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
-		C.ctx.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
+		C.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
 	}
 
 },
