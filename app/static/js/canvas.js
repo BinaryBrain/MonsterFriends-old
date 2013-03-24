@@ -117,7 +117,12 @@ drawMenu : function (oid) {
 	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing), buttonWidth, buttonHeight);
 	C.drawRoundedRect(20, 400-buttonWidth/2, buttonVSpacing+(buttonHeight+buttonVSpacing)*2, buttonWidth, buttonHeight);
 	ctx.textAlign="center";
-	ctx.fillText('Fight la vie', C.headWidth/2 - C.fontSize/2, C.headHeight/2);
+	var msg;
+	oid==0 ? msg='Fight un random péon' : msg='Fight '+oid;
+	ctx.fillText(msg, C.cw/2, buttonVSpacing+buttonHeight/2+8);
+	ctx.fillText('Résumé la vie', C.cw/2, buttonVSpacing*2+buttonHeight/2+8+buttonHeight);
+	ctx.fillText('Historique la vie', C.cw/2, buttonVSpacing*3+buttonHeight/2+8+buttonHeight*2);
+
 
 	
 },
