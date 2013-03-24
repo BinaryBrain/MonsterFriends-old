@@ -290,7 +290,6 @@ drawButton: function (x, y, w, h, text, callback) {
 	})
 },
 
->>>>>>> Draw Dialog and Draw Button
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
 	var pi = C.pi;
