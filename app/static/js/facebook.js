@@ -3,10 +3,8 @@ Facebook = {
   myname: 0,
   
   getFriends: function (cb) {
-    FB.api('/me/friends', function (response) {
-       cb(response)
-    })
-  },
+
+       requestFriends(renderMFS); 
 }
 
 function login() {
