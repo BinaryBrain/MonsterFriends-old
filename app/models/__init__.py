@@ -92,8 +92,19 @@ class Monster(db.Model):
 
     belong_to = db.Column(db.Integer, db.ForeignKey('user.fb_id'))
 
-    def get_stats(self):
-        return {
+    def get_stats(self, complete=False):
+        d = dict()
+        if complete:
+            d = {
+                'speed': self.speed,
+                'attack': self.attack,
+                'defense': self.defense,
+                'atk_spe': self.atk_spe,
+                'def_spe': self.def_spe
+            }
+
+        d.update(
+            {
                 'fb_id': self.fb_id,
                 'owner': self.belong_to,
                 'level': self.level,
@@ -134,7 +145,11 @@ class Monster(db.Model):
                         'pp': self.atk4.pp_max
                     }
                 ]
-        }
+            }
+
+        )
+
+        return d
 
 class Attak(db.Model):
 
