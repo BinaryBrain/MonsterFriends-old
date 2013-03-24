@@ -30,13 +30,13 @@ Controller = {
 		console.log("Error: "+err);
 		Console.show();
 		if (err=="Error: You're not in a fight, I can't send you the info...") {
-			Controller.changeScene(Scene.ENEMYCHOICE);
+			Controller.changeScene(Scene.ENEMYCHOICE)
 		}
 	},
 
 	init: function () {
+		C.init();
 		Network.init(function () {
-			C.init();
 			Controller.changeScene(Scene.MENU);
 		});
 	},
@@ -71,6 +71,7 @@ Controller = {
 					function (data) {
 						// TODO : Recevoir l'oid
 						var result = data;
+						console.log(result);
 						C.drawMenu(result);
 					}
 				);
@@ -85,10 +86,8 @@ Controller = {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
 						var result = data;
 						C.drawFight(result);
-						console.log("fightinfo", data);
-						//C.drawAttackDialog(, function (aid) {
-						//	sendChosenAttack(aid)
-						//});
+						console.log(data);
+						//C.drawAttackDialog();
 					}
 					
 				);
@@ -105,7 +104,7 @@ Controller = {
 							names[i] = data[i].name;
 						}
 						
-						console.log("friends", data);
+						console.log(data);
 						
 						// TODO : Give arguments to drawEnemyChoice
 						C.drawEnemyChoice(data);
@@ -130,7 +129,7 @@ Controller = {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
 						console.log(result);
-						C.drawMonsters(JSON.parse(result));
+						C.drawMonsters(result);
 					}
 				);
 				//drawMonsters();
