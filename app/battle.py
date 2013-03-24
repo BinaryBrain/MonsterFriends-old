@@ -13,6 +13,8 @@ from models import User, Monster, Attak, db
 
 from monsterfriends import app
 
+import logging
+
 monkey.patch_all()
 
 # class FlaskNamespace(BaseNamespace):
@@ -91,6 +93,7 @@ class BattleNamespace(BaseNamespace):
         self.fbid = None
         self.eid = None
         self.r = DatabaseBattle(Redis(), db)
+        self.log = logging.getLogger()
 
     @property
     def in_a_fight(self):
@@ -106,6 +109,7 @@ class BattleNamespace(BaseNamespace):
 
 
     def on_hello(self, fbid):
+        self.log.debug("Receive hello from {}".format(fbid))
         self.fbid = fbid
         with app.app_context():
             u = User.query.filter_by(fb_id=self.fbid).first()
@@ -118,12 +122,14 @@ class BattleNamespace(BaseNamespace):
         return True
 
     def on_get_current_fight(self):
+        self.log.debug("On current fight from {}".format(self.fbid))
         if not self.fbid:
             self.emit("error", "Hello has not been sent, I can't know your current fight :(")
             return True
         self.emit("current_fight", self.in_a_fight or 0)
 
     def on_ask_fight(self, eid):
+        self.log.debug("On ask fight from {}".format(self.fbid))
         if self.fbid == eid:
             self.emit('error', "You can't fight against yourself...")
             return True
@@ -159,6 +165,7 @@ class BattleNamespace(BaseNamespace):
         return True
 
     def on_get_fight_info(self):
+        self.log.debug("On get fight info from {}".format(self.fbid))
         if not self.fbid:
             self.emit("error", "Hello has not been sent, I can't do shit :(")
             return True
@@ -172,6 +179,7 @@ class BattleNamespace(BaseNamespace):
         self.emit("fight_info", json.dumps(current_info))
 
     def on_attack(self, aid):
+        self.log.debug("On attach from {}".format(self.fbid))
         current_info = self.r.get_current_fight_info(self.fbid)
 
         if current_info["current_player"] is not self.fbid:
@@ -218,6 +226,7 @@ class BattleNamespace(BaseNamespace):
 
 
     def on_get_history(self):
+        self.log.debug("On get history from {}".format(self.fbid))
         if not self.fbid:
             self.emit("error", "Hello has not been sent, I can't fetch your history :(")
             return True
@@ -226,6 +235,7 @@ class BattleNamespace(BaseNamespace):
         return True
 
     def on_get_monsters(self):
+        self.log.debug("On get monsters from {}".format(self.fbid))
         if not self.fbid:
             self.emit("error", "Hello has not been sent, I can't fetch your monsters book :(")
             return True
