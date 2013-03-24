@@ -64,10 +64,6 @@ function go() {
 }
 
 $(function () {
-  _fbinit()
-})
-
-function _fbinit() {
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '286327544834291', // App ID
@@ -101,8 +97,4 @@ function _fbinit() {
      js.src = "//connect.facebook.net/en_US/all.js";
      ref.parentNode.insertBefore(js, ref);
   } (document));
-}
-
-setTimeout(function () {
-  _fbinit()
-}, 1000)
+})
