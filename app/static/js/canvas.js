@@ -209,11 +209,12 @@ drawMonsters : function (data) {
 	C.ctx.fillStyle = 'rgb(137,137,137)';
 	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
 	C.ctx.fillStyle = 'rgb(197,197,197)';
+	alert("fnu");
 	for (var i = 0; i< monsters.length;i++){
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		C.ctx.drawImage(C.lp1, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
-
+	alert("fnu2");
 },
 
 // Draws the enemy choice
