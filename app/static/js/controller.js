@@ -54,11 +54,18 @@ Controller = {
 			break;
 			
 			case Scene.ENEMYCHOICE:
-				Network.askFight(
-					function (eid, data) {
-						// TODO : Give arguments to drawEnemyChoice
-						var result = data;
-						drawEnemyChoice(eid, data);
+				Facebook.getFriends(
+					function (data) {
+						var ids=[];
+						
+						for(var i=0, len=data.friends.length; i<len; i++) {
+							ids[i] = data.friends[i].id
+						}
+						
+						Network.getAvailableFriends(ids, function (data) {
+							// TODO : Give arguments to drawEnemyChoice
+							drawEnemyChoice(data);
+						})
 					}
 				);
 				drawEnemyChoice();

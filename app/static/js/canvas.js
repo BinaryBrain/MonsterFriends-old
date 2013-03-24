@@ -25,7 +25,7 @@ init : function (){
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					C.drawMenu(); // change
+					C.drawFight(); // change
 				} 
 				C.lp2.src = '../static/img/lp2.jpg';
 			} 
