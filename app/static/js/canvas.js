@@ -25,7 +25,7 @@ init : function () {
 			C.lp1.onload = function() {
 				C.lp2 = new Image();
 				C.lp2.onload = function() {
-					// C.drawEnemyChoice();
+					C.drawEnemyChoice();
 				} 
 				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
@@ -244,13 +244,22 @@ drawEnemyChoice : function () {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	var trainers = ['kdousse']; // Todo
+	var trainers = ['kdousse','basile.vu1']; // Todo
+	
+	
+	
+	$('#content').append('<div id="peopleGrid"></div>');
+	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });
 	
 	for (var i = 0; i<trainers.length; i++) {
-		C.ctx.drawImage(C.lp2, (horSpace + width)*(i%5) + horSpace, (verSpace + height)*(Math.floor(i/5)) + h2 + verSpace);
+		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
+		$('#peopleGrid').append(s);
 	}
 	
-	//$(
+	$("#peopleGrid").on('click',"img", function () {
+		var _id = $(this).attr("data-id");
+		Controller.sendChosenFriend(_id);
+	})
 	
 	
 },
@@ -386,6 +395,7 @@ drawHpBar : function (x, y, w, h, hp, hpMax) {
 // The function used to clear the canvas
 clear : function () {
 	C.ctx.clearRect(0,0,C.cw, C.ch);
+<<<<<<< HEAD
 },
 
 drawConnectionRequired: function () {
@@ -411,5 +421,10 @@ drawAttackDialog: function (a1, a2, a3, a4, cb) {
 		C.drawButton(680, C.h3+70, 60, 42, a4.name, function () { cb(a4.id) });
 	})
 },
+=======
+	C.unbindButtons();
+	$('#peopleGrid').remove();
+}
+>>>>>>> Done clickable friends.
 
 }
