@@ -13,7 +13,7 @@ $(function () {
 })
 
 // Different scenes
-Scene = {MENU : 0, FIGHT : 1, EVOLUTION : 2, ENEMYCHOICE : 3, HISTORY : 4, MONSTERS : 5}
+Scene = {MENU : 0, FIGHT : 1, ENEMYCHOICE : 2, HISTORY : 3, MONSTERS : 4}
 
 /*
  * Controller Object
@@ -36,7 +36,8 @@ Controller = {
 				Network.getCurrentFight(
 					function (data) {
 						// TODO : Recevoir l'oid
-						var result = data;
+						var result = $.getJSON("../temp/fightInfos.json");
+						alert(result);
 						drawMenu(result);
 					}
 				);

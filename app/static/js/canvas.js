@@ -154,14 +154,20 @@ drawVictory : function () {
 	
 },
 
-// Draws the elvove screen
-drawEvolution : function () {
-
-},
 
 // Draws the match history
- drawHistory : function () {
-
+ drawHistory : function (data) {
+	C.fontSize = 20;
+	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	
+	var ctx = C.ctx;
+	ctx.font = (C.font);
+	
+	var entryWidth = 780;
+	var entryHeight = 40;
+	var entryVSpacing = 20;
+	
+	C.drawRoundedRect(20, 400-entryWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
 },
 
 // Draws the monsters 
