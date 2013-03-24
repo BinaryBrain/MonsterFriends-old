@@ -92,23 +92,53 @@ drawFight : function () {
 	
 	ctx.lineWidth = 2;
 	ctx.strokeStyle = 'rgb(100,100,100)';
+	ctx.fillStyle = 'rgb(100,100,100)';
 	
 	// containers
 	C.drawRoundedRect(20, hps, h2 + hps, hw, hh);
+	ctx.beginPath();
+	ctx.arc(hps + hw - 20, h2 + hps + hh - 20, 20, 0, 0.5*pi, false);
+	ctx.lineTo(hps + hw + 50, h2 + hps + hh);
+	ctx.lineTo(hps + hw, h2 + hps + hh - 20);
+	ctx.fill();
+	
 	C.drawRoundedRect(20, bw - (hw + hps), h3 - (hh + hps), hw, hh);
+	ctx.beginPath();
+	ctx.arc(bw - (hw + hps) + r, h3 - (hh + hps) + r, r, pi, 1.5*pi, false);
+	ctx.lineTo(bw - (hw + hps + 50), h3 - (hh + hps));
+	ctx.lineTo(bw - (hw + hps), h3 - (hh + hps) + 20);
+	ctx.fill();
 	
-	// hp bars
-	//test values
-	var totHp1 = 300;
+	// test values
+	var totHp1 = 320;
 	var hp1 = 280;
-	var perHp1 = hp1/totHp1;
+	var totHp2 = 300;
+	var hp2 = 280;
+	var level1 = 30;
+	var level2 = 42;
+	var name1 = 'Protectator';
+	var name2 = 'Flagoul';
+
+
 	
-	var perHp2 = 1;
+	// hp bars and values
+	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, hp2, totHp2);
+	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, hp1, totHp1);
 	
 	
+	ctx.font = '16pt Calibri,Geneva,Arial';
+	ctx.fillStyle = 'rgb(100,100,100)';
+	ctx.textAlign = 'center';
 	
-	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12, perHp2);
-	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12, perHp1);
+	ctx.fillText (name2, hps + hw/5, h2 + hps + (hh/3));
+	ctx.fillText (name1, bw - (hw + hps) + hw/5, h3 - (hh + hps) + (hh/3));
+	
+	ctx.fillText ('lvl ' + level2, hps + (hw/5)*4, h2 + hps + (hh/3));
+	ctx.fillText ('lvl ' + level1, bw - (hw + hps) + (hw/5)*4, h3 - (hh + hps) + (hh/3));
+	
+	ctx.fillText (hp1 + ' / ' + totHp2, hps + hw/2, h2 + hps + (hh/6)*5);
+	ctx.fillText (hp2 + ' / ' + totHp1, bw - (hw + hps) + hw/2, h3 - (hh + hps) + (hh/6)*5);
+	
 	
 	
 	// actions
@@ -174,6 +204,7 @@ drawEnemyChoice : function () {
 
 },
 
+// Useful function to draw rectangles with curved angles
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
 	var pi = C.pi;
@@ -194,8 +225,10 @@ drawRoundedRect : function (r, startx, starty, width, height) {
 	ctx.stroke();
 },
 
-drawHpBar : function (x, y, w, h, percent) {
+// Draws hp bars
+drawHpBar : function (x, y, w, h, hp, hpMax) {
 	
+	var percent = hp/hpMax;
 	var ctx = C.ctx;
 	
 	if(percent > 0.5 ) {
@@ -210,11 +243,14 @@ drawHpBar : function (x, y, w, h, percent) {
 	
 	ctx.clearRect(x, y, w, h);
 	C.drawRoundedRect(h/2, x, y, w, h);
-	C.drawRoundedRect((h-2)/2, x, y, w*percent, h);
+	
+	if(hp <= hpMax) C.drawRoundedRect((h-2)/2, x, y, w*percent, h);
+	else C.drawRoundedRect((h-2)/2, x, y, w, h);
 	ctx.fill();
 
 },
 
+// The function used to clear the canvas
 clear : function () {
 	C.ctx.clearRect(0,0,C.cw, C.ch);
 }
