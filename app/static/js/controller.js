@@ -27,8 +27,8 @@ Controller = {
 	scene: Scene.MENU,
 	
 	error: function(err) {
-		Console.archieveMessage(err);
-		console.log(err);
+		Console.archieveMessage("Error: "+err);
+		console.log("Error: "+err);
 	},
 	
 	changeScene: function(scene) {

@@ -51,8 +51,7 @@ var socket = io.connect();
 socket.on('connect', function (data) {
   Network.myid = socket.socket.sessionid;
   
-  alert(data);
-  console.log(data);
+  console.log("Connected");
   
   socket.emit('hello', "1236701567" /*Facebook.getUserID()*/ );
 
