@@ -225,7 +225,7 @@ drawMonsters : function (data) {
 		var hpMax = data[0].pv_max;
 		var hp = data[0].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
-		C.drawHpBar(margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 100, 20, hp, hpMax);
+		C.drawHpBar(60+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 150, 20, hp, hpMax);
 	}
 
 },
