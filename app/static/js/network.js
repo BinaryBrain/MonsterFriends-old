@@ -36,7 +36,7 @@ Network = {
     });
   },
   
-  getAvaiableFriends(ids, cb) {
+  getAvaiableFriends: function (ids, cb) {
     socket.emit('get_avaiable_friends', ids);
     socket.on('avaiable_friends', function (data) {
       cb(data);
