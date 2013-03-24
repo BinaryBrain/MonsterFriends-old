@@ -12,7 +12,7 @@ Network = {
       socket.on('error', function (err) { Controller.error(err); })
 
       socket.on('welcome', function () {
-        Controller.init()
+        cb()
         
         socket.on('new_fight', function (oid) {
           Controller.newFight(oid);
