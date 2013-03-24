@@ -186,10 +186,10 @@ drawHistory : function (data) {
 	var entryHeight = 40;
 	var entryVSpacing = 20;
 	
-	C.drawRoundedRect(20, 400-entryWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
+	C.drawRoundedRect(20, 400-entryWidth/2, entryVSpacing, entryWidth, entryHeight);
 	var i = 0
 	for (var entry in data) {
-		C.drawRoundedRect(20, 400-entryWidth/2, (i+1)*buttonVSpacing, buttonWidth, buttonHeight);
+		C.drawRoundedRect(20, 400-entryWidth/2, (i+1)*entryVSpacing, entryWidth, entryHeight);
 		// Afficher les données de l'historique
 	}
 },
