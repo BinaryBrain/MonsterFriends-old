@@ -95,8 +95,8 @@ Controller = {
 					function (data) {
 						var ids=[];
 						
-						for(var i=0, len=data.friends.length; i<len; i++) {
-							ids[i] = data.friends[i].id
+						for(var i=0, len=data.length; i<len; i++) {
+							ids[i] = data[i].id
 						}
 						
 						Network.getAvailableFriends(ids, function (data) {
@@ -142,6 +142,13 @@ Controller = {
  * 
  */
 Console = {
+
+	archieveHistory: function (data) {
+		for (var i = 0; i < data.length; i++) {
+			
+		}
+	}
+
 	hide: function () {
 		this.consoleNode.hide();
 	},
