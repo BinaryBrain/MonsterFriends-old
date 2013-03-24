@@ -271,6 +271,7 @@ drawEnemyChoice : function () {
 	}
 	
 	$("#peopleGrid").on('click',"img", function () {
+		console.log("fnu ?")M
 		var _id = $(this).attr("data-id");
 		Controller.sendChosenFriend(_id);
 		console.log("Friend id : " + _id);
