@@ -149,10 +149,20 @@ drawFight : function () {
 
 // Draws the menu
 drawMenu : function (oid) {
-	
 	var buttonWidth = 200;
 	var buttonHeight = 50;
-	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 - (buttonHeight + 20) , 200 , 50, "Fight", function () { Controller.changeScene(Scene.FIGHT); });
+	
+	if(oid == 0) {	
+		C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 - (buttonHeight + 20) , 200 , 50, "New Fight", function () {
+			Controller.changeScene(Scene.ENEMYCHOICE);
+		});
+	}
+	else {
+		C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 - (buttonHeight + 20) , 200 , 50, "Resume Fight", function () {
+			Controller.changeScene(Scene.FIGHT);
+		});
+	}
+	
 	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2, 200 , 50, "Resume", function () { Controller.changeScene(Scene.MONSTERS); });
 	C.drawButton(C.cw/2 - buttonWidth/2, C.ch/2 - buttonHeight/2 + (buttonHeight + 20), 200 , 50, "History", function () { Controller.changeScene(Scene.HISTORY); });
 	

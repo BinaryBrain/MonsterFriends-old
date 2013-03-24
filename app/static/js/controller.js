@@ -49,7 +49,6 @@ Controller = {
 					function (data) {
 						// TODO : Recevoir l'oid
 						var result = data;
-						alert(result);
 						C.drawMenu(result);
 					}
 				);
