@@ -38,7 +38,7 @@ Controller = {
 						// TODO : Recevoir l'oid
 						var result = data;
 						alert(result);
-						drawMenu(result);
+						C.drawMenu(result);
 					}
 				);
 			break;
@@ -46,17 +46,15 @@ Controller = {
 			case Scene.FIGHT:
 				// Temporary part
 				Console.show()
-				C.drawFight($.getJSON("../temp/fightInfos.json"));
-				/*
 				Network.getFightInfos(
 					
 					function(data) {
 						// TODO : Recevoir plein de data, les traiter et le repasser pour draw des jolis trucs !
 						var result = $.getJSON("../temp/fightInfos.json");
-						drawFight(result);
+						C.drawFight(result);
 					}
 					
-				); */
+				);
 			break;
 			
 			case Scene.ENEMYCHOICE:
@@ -70,7 +68,7 @@ Controller = {
 						
 						Network.getAvailableFriends(ids, function (data) {
 							// TODO : Give arguments to drawEnemyChoice
-							drawEnemyChoice(data);
+							C.drawEnemyChoice(data);
 						})
 					}
 				);
@@ -82,7 +80,7 @@ Controller = {
 					function (data) {
 						// TODO : Give arguments to drawHistory
 						var result = data;
-						drawHistory(result);
+						C.drawHistory(result);
 					}
 				);
 			break;
@@ -92,7 +90,7 @@ Controller = {
 					function (data) {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
-						drawMonsters(result);
+						C.drawMonsters(result);
 					}
 				);
 				drawMonsters();

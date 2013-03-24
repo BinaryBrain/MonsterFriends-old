@@ -198,10 +198,17 @@ drawVictory : function () {
 	var entryVSpacing = 20;
 	
 	C.drawRoundedRect(20, 400-entryWidth/2, buttonVSpacing, buttonWidth, buttonHeight);
+	var i = 0
+	for (var entry in data) {
+		C.drawRoundedRect(20, 400-entryWidth/2, (i+1)*buttonVSpacing, buttonWidth, buttonHeight);
+		// Afficher les données de l'historique
+	}
 },
 
 // Draws the monsters 
 drawMonsters : function () {
+
+	
 
 },
 
