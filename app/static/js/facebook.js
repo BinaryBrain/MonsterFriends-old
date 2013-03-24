@@ -7,7 +7,7 @@ Facebook = {
   getFriends: function(cb){
                  FB.api('/me/friends?fields=installed', function(response){
                   for(var i = 0; i < response.data.length; i++){                      if(response.data[i].installed !== undefined){
-                val.push(response.data[i].id);
+                Facebook.val.push(response.data[i].id);
                     }
                       }
                 renderMFS();
@@ -24,12 +24,12 @@ Facebook = {
 
             // Iterate through the array of friends object and create a checkbox for each one.
               for(var i = 0; i < response.data.length; i++) {
-                 for(var j = 0; j < val.length; j++){
+                 for(var j = 0; j < Facebook.val.length; j++){
 
-                    if(response.data[i].id == val[j]){
+                    if(response.data[i].id == Facebook.val[j]){
 
-                        friendsP.push({id : response.data[i].id, name: response.data[i].name});
-                        cb(friendsP);
+                        Facebook.friendsP.push({id : response.data[i].id, name: response.data[i].name});
+                        cb(Facebook.friendsP);
                       }
                   }
               }
