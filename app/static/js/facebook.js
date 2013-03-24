@@ -1,7 +1,8 @@
 Facebook = {
   userID: 0,
   myname: 0,
-  
+  val: [],
+
   getFriends: function(renderMFS){
                  FB.api('/me/friends?fields=installed', function(response){
                   for(var i = 0; i < response.data.length; i++){                      if(response.data[i].installed !== undefined){
@@ -10,6 +11,8 @@ Facebook = {
                       }
                 renderMFS();
              });
+
+
 
     function renderMFS() {
           // First get the list of friends for this user with the Graph API
