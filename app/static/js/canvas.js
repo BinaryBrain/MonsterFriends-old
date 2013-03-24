@@ -246,7 +246,7 @@ drawMonsters : function (data) {
 },
 
 // Draws the enemy choice
-drawEnemyChoice : function () {
+drawEnemyChoice : function (data) {
 
     var buttonWidth = 200;
     var buttonHeight = 50;
@@ -263,7 +263,8 @@ drawEnemyChoice : function () {
 	var horSpace = (C.cw - width*5)/6;
 	var verSpace = (C.ch - h2 - height*5)/6
 	
-	var trainers = ['kdousse','basile.vu1']; // Todo
+	var trainers = data;
+	console.log(data);
 	
 	
 	
@@ -271,7 +272,7 @@ drawEnemyChoice : function () {
 	$('#peopleGrid').css({ width: "800px", position: "absolute", top: "180px", bottom : "-53px", left: "50%", marginLeft: "-400px", "overflow-y" : "auto" });
 	
 	for (var i = 0; i<trainers.length; i++) {
-		var s = '<img data-id="'+ trainers[i] +'" id ="img'+i+'" onclick="Controller.sendChosenFriend("'+ trainers[i] +'");" src = "http://graph.facebook.com/' + trainers[i] + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
+		var s = '<img data-id="'+ trainers[i].id +'" id ="img'+i+'" onclick="Controller.sendChosenFriend("'+ trainers[i].id +'");" src = "http://graph.facebook.com/' + trainers[i].id + '/picture" style="position: absolute; left: ' + Math.floor((horSpace + width)*(i%5) + horSpace) + 'px"; top: ' + Math.floor((verSpace + height)*(Math.floor(i/5)) + h2 + verSpace) +'px">'
 		$('#peopleGrid').append(s);
 	}
 	
