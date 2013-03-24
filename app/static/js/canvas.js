@@ -235,7 +235,7 @@ drawMonsters : function (data) {
 		C.ctx.fillText(data[i].attack+' S.Atk', 380+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].attack+' S.Def', 380+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillText(data[i].attack+' Speed', 460+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
-		C.ctx.fillText(data[i].pv+'/'+data[i].pv_max+' HP', 140+margin*2, 20+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.fillText(data[i].pv+'/'+data[i].pv_max+' HP', 140+margin*2, 22+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
 	
 	for (var i = 0; i< data.length;i++) {
