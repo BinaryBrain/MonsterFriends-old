@@ -8,8 +8,9 @@ import json
 
 from socketio.namespace import BaseNamespace
 from gevent import monkey
+from sqlalchemy import or_
 
-from models import User, Monster, Attak, db
+from models import User, Monster, Attak, db, Fight
 
 from monsterfriends import app
 
@@ -62,11 +63,21 @@ class DatabaseBattle(object):
         self.r.delete("f:c:{eid}".format(eid=eid))
 
     def get_last_history(self, fbid):
+
+        with app.app_context():
+            User.query.filter_by(fb_id=0).first().fights.all()
+
         return self.r.lrange('f:h:r:{fbid}'.format(fbid=fbid), 0, 10) or []
 
     def add_game_result(self, fbid, eid, result):
-        self.r.lpush("f:h:r:{fbid}".format(fbid=fbid), json.dumps((eid, result)))
-        self.r.lpush("f:h:r:{eid}".format(eid=eid), json.dumps((fbid, not result)))
+
+        with app.app_context():
+            f = Fight(fbid, eid, result)
+            db.session.add(f)
+            db.session.commit()
+
+        # self.r.lpush("f:h:r:{fbid}".format(fbid=fbid), json.dumps((eid, result)))
+        # self.r.lpush("f:h:r:{eid}".format(eid=eid), json.dumps((fbid, not result)))
 
     def get_current_fight_info(self, fbid):
         eid = self.r.get("f:c:{fbid}".format(fbid=fbid))
@@ -204,7 +215,7 @@ class BattleNamespace(BaseNamespace):
 
         for atk in my_monster["atks"]:
             if atk["id"] == aid:
-                if atk["pp"] < atk["pp_cost"]:
+                if atk["pp"] < 1:
                     self.emit("error", "You don't have enough pp")
                     return True
                 dmg = atk["dmg"]

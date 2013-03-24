@@ -29,7 +29,8 @@ class User(db.Model):
 
     fb_id = db.Column(db.BigInteger, primary_key=True)
     monsters = db.relationship("Monster")
-    fights = db.relationship("Fight", primaryjoin="or_(Fight.fb_id1==User.fb_id, Fight.fb_id2==User.fb_id)")
+    fights = db.relationship("Fight", primaryjoin="or_(Fight.fb_id1==User.fb_id, Fight.fb_id2==User.fb_id)",
+                             lazy='dynamic')
 
     def __init__(self, fb_id):
         self.fb_id = fb_id
@@ -85,7 +86,6 @@ class Monster(db.Model):
                         'dmg': self.atk1.dmg,
                         'type': self.atk1.type,
                         'pp_max': self.atk1.pp,
-                        'pp_cost': self.atk1.pp_cost,
                         'pp': self.atk1.pp
                     },
                     {
@@ -94,7 +94,6 @@ class Monster(db.Model):
                         'dmg': self.atk2.dmg,
                         'type': self.atk2.type,
                         'pp_max': self.atk2.pp,
-                        'pp_cost': self.atk2.pp_cost,
                         'pp': self.atk2.pp
                     },
                     {
@@ -103,7 +102,6 @@ class Monster(db.Model):
                         'dmg': self.atk3.dmg,
                         'type': self.atk3.type,
                         'pp_max': self.atk3.pp,
-                        'pp_cost': self.atk3.pp_cost,
                         'pp': self.atk3.pp
                     },
                     {
@@ -112,7 +110,6 @@ class Monster(db.Model):
                         'dmg': self.atk4.dmg,
                         'type': self.atk4.type,
                         'pp_max': self.atk4.pp,
-                        'pp_cost': self.atk4.pp_cost,
                         'pp': self.atk4.pp
                     }
                 ]
@@ -128,4 +125,3 @@ class Attak(db.Model):
     dmg = db.Column(db.Integer)
     desc = db.Column(db.Text)
     pp_max = db.Column(db.Integer)
-    pp_cost = db.Column(db.Integer)
