@@ -127,8 +127,8 @@ Controller = {
 					function (data) {
 						// TODO : Give arguments to drawMonsters
 						var result  = data;
-						C.drawMonsters(result);
 						console.log(result);
+						C.drawMonsters(result);
 					}
 				);
 				//drawMonsters();
