@@ -29,7 +29,7 @@ Controller = {
 	error: function(err) {
 		Console.archieveMessage(err);
 		console.log(err);
-	}
+	},
 	
 	changeScene: function(scene) {
 		Console.hide();
