@@ -204,28 +204,28 @@ drawMonsters : function (data) {
 	var monsters = ['kdousse','basile.vu1','sacha.bron','luca.bron','',''];
 	
 	
-	
 	C.ctx.fillStyle = 'rgb(137,137,137)';
 	C.ctx.fillRect (1, 1, C.cw-2, C.ch-2);
 	C.ctx.fillStyle = 'rgb(197,197,197)';
 
-	for (var i = 0; i< monsters.length;i++){
+	for (var i = 0; i< data.length;i++){
 		C.ctx.fillStyle = 'rgb(197,197,197)';
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		var fbid = data[0].fb_id;
+		var fbid = data[i].fb_id;
 		console.log(fbid);
 		imgFile.src = 'http://graph.facebook.com/' + fbid + '/picture';
-		var level = data[0].level;
-		var hpMax = data[0].pv_max;
-		var hp = data[0].pv;
+		var level = data[i].level;
+		var hpMax = data[i].pv_max;
+		var hp = data[i].pv;
 		C.ctx.drawImage(imgFile, margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 		C.ctx.fillStyle = 'rgb(0,0,0)';
-		C.ctx.fillText('Level '+level, 70+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
+		C.ctx.font = "22px "+C.fontFamily;
+		C.ctx.fillText('Level '+level, 80+margin*2, containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2);
 	}
 	
 	for (var i = 0; i< monsters.length;i++) {
-		C.drawHpBar(70+margin*2, 30+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 150, 20, hp, hpMax);
+		C.drawHpBar(70+margin*2, 30+containerHeight*i + (i+1)*spaces + (containerHeight)/2 - lp1Size/2, 200, 18, hp, hpMax);
 	}
 
 },
