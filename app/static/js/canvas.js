@@ -3,12 +3,10 @@ C = {
 headHeight: 100,
 actionsHeight : 150,
 vsWidth: 150, vsHeight: 50,
-pWidth: 160, pHeight: 160,
+pWidth: 150, pHeight: 150,
 hpWidth: 400, hpHeight: 100,
-vsSpace: 5, pBordSpace: 20, hpBordSpace: 20, actionsSpace: 20,
+vsSpace: 5, pBordSpace: 40, hpBordSpace: 20, actionsSpace: 20,
 pi: Math.PI,
-
-//attacks: {'','','',''},
 		
 // load the images and set the basic variables
 init : function (){
@@ -16,6 +14,11 @@ init : function (){
 	C.ctx = document.getElementById('canvas').getContext('2d');
 	C.cw = document.getElementById('canvas').width,
 	C.ch = document.getElementById('canvas').height;
+	
+	
+	C.monFriends = ['kdousse', 'basile.vu1'];
+	C.trainers = ['kdousse', 'basile.vu1'];
+	
 	
 	C.p1 = new Image();
 	C.p1.onload = function() {
@@ -27,13 +30,13 @@ init : function (){
 				C.lp2.onload = function() {
 					C.drawFight(); // change
 				} 
-				C.lp2.src = '../static/img/lp2.jpg';
+				C.lp2.src = 'http://graph.facebook.com/' + C.trainers[1] + '/picture';
 			} 
-			C.lp1.src = '../static/img/lp1.jpg';
+			C.lp1.src = 'http://graph.facebook.com/' + C.trainers[0] + '/picture';
 		} 
-		C.p2.src = '../static/img/p2.jpg';
+		C.p2.src = 'http://graph.facebook.com/' + C.monFriends[1] + '/picture?width=150&height=150';
 	} 
-	C.p1.src = '../static/img/p1.jpg';
+	C.p1.src = 'http://graph.facebook.com/' + C.monFriends[0] + '/picture?width=150&height=150';
 	
 	C.headWidth = C.cw;
 	C.battleWidth = C.cw;
@@ -45,6 +48,8 @@ init : function (){
 	C.h2 = C.h1 + C.headHeight;
 	C.h3 = C.h2 + C.battleHeight;
 	C.h4 = C.ch;
+	
+	
 	
 },
 
@@ -86,8 +91,23 @@ drawFight : function () {
 	// name, lvl, hp
 	
 	ctx.lineWidth = 2;
+	ctx.strokeStyle = 'rgb(100,100,100)';
+	
+	// containers
 	C.drawRoundedRect(20, hps, h2 + hps, hw, hh);
 	C.drawRoundedRect(20, bw - (hw + hps), h3 - (hh + hps), hw, hh);
+	
+	// hp bars
+	
+	var hp1max = 300;
+	var hp1 = 280;
+	
+	var hp2 = 0.2;
+	
+	
+	
+	C.drawHpBar(2*hps, h2 + hps + 50, hw-2*hps, 12);
+	C.drawHpBar(bw - hw, h3 - (hh + hps) + 50, hw - 2*hps, 12);
 	
 	
 	// actions
@@ -97,7 +117,8 @@ drawFight : function () {
 	var aw = C.actionsWidth;
 	var ah = C.actionsHeight;
 	
-	C.drawRoundedRect(20, as, h3 + as, aw - 2*as, ah - 2*as);
+	C.drawRoundedRect(20, as, h3, aw - 2*as, ah - 10);
+	ctx.stroke();
 },
 
 // Draws the menu
@@ -170,6 +191,17 @@ drawRoundedRect : function (r, startx, starty, width, height) {
 	ctx.arc(x + r, y + h - r, r, 0.5*pi, pi, false);
 	ctx.lineTo(x, y + r);
 	ctx.stroke();
+},
+
+drawHpBar : function (x, y, w, h) {
+
+	C.ctx.fillStyle = 'rgb(94,240,81)';
+	C.drawRoundedRect(h/2, x, y, w, h);
+	C.ctx.fill();
+},
+
+clear : function () {
+	C.ctx.clearRect(0,0,C.cw, C.ch);
 }
 
 }
