@@ -32,7 +32,9 @@ Controller = {
 
 	init: function () {
 		C.init()
-		Controller.changeScene(Scene.MENU)
+		Network.init(function () {
+			Controller.changeScene(Scene.MENU);
+		});
 	},
 	
 	changeScene: function(scene) {
@@ -43,7 +45,6 @@ Controller = {
 		switch(scene)
 		{
 			case Scene.MENU:
-				console.log("menu")
 				Network.getCurrentFight(
 					function (data) {
 						// TODO : Recevoir l'oid

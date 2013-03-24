@@ -1,4 +1,30 @@
+var socket = io.connect();
+
 Network = {
+  init: function (cb) {
+    socket.on('connect', function (data) {
+      Network.myid = socket.socket.sessionid;
+      
+      console.log("Connected");
+      
+      socket.emit('hello', "1236701567" /*Facebook.getUserID()*/ );
+
+      socket.on('error', function (err) { Controller.error(err); })
+
+      socket.on('welcome', function () {
+        Controller.init()
+        
+        socket.on('new_fight', function (oid) {
+          Controller.newFight(oid);
+        })
+      })
+    });
+
+    socket.on('disconnect', function () {
+      // TODO
+    });   
+  },
+  
   getCurrentFight: function (cb) {
     socket.emit('get_current_fight');
     socket.on('current_fight', function (data) {
@@ -46,25 +72,3 @@ Network = {
     socket.emit('attack', aid );
   },
 }
-
-var socket = io.connect();
-
-socket.on('connect', function (data) {
-  Network.myid = socket.socket.sessionid;
-  
-  console.log("Connected");
-  
-  socket.emit('hello', "1236701567" /*Facebook.getUserID()*/ );
-
-  socket.on('error', function (err) { Controller.error(err); })
-
-  socket.on('welcome', function () {
-    socket.on('new_fight', function (oid) {
-      Controller.newFight(oid);
-    })
-  })
-});
-
-socket.on('disconnect', function () {
-  // TODO
-});
