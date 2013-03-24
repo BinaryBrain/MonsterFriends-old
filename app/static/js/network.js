@@ -43,8 +43,8 @@ Network = {
     });
   },
 
-  attack: function (fid, aid) {
-    socket.emit('attack', { fid: fid, aid: aid });
+  attack: function (aid) {
+    socket.emit('attack', aid );
   },
 }
 
