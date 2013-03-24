@@ -7,7 +7,7 @@ Network = {
   },
   
   getFightInfos: function (cb) {
-    socket.emit('get_fight_infos');
+    socket.emit('get_fight_info');
     socket.on('fight_infos', function (data) {
       cb(data);
     });
