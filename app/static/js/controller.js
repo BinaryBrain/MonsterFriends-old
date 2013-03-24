@@ -86,7 +86,9 @@ Controller = {
 						var result = data;
 						C.drawFight(result);
 						console.log("fightinfo", data);
-						//C.drawAttackDialog();
+						//C.drawAttackDialog(, function (aid) {
+						//	sendChosenAttack(aid)
+						//});
 					}
 					
 				);
