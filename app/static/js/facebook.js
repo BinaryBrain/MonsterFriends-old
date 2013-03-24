@@ -2,7 +2,11 @@ Facebook = {
   userID: 0,
   myname: 0,
   
-  
+  getFriends: function (cb) {
+    FB.api('/me/friends', function (response) {
+       cb(response)
+    })
+  },
 }
 
 function login() {
@@ -26,10 +30,6 @@ function go() {
       $("#facebookconnect").html("Hi, "+Facebook.myname)
       
       Network.facebookReady(Facebook.userID)
-  });
-  
-  FB.api('/me/friends', function(response) {
-      console.log(response)
   });
 }
 
