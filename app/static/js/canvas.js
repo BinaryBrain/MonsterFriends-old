@@ -1,5 +1,5 @@
 C = {
-
+fontFamily: 'Calibri,Geneva,Arial',
 headHeight: 100,
 actionsHeight : 150,
 vsWidth: 150, vsHeight: 50,
@@ -7,18 +7,15 @@ pWidth: 150, pHeight: 150,
 hpWidth: 400, hpHeight: 100,
 vsSpace: 5, pBordSpace: 40, hpBordSpace: 20, actionsSpace: 20,
 pi: Math.PI,
-		
+
 // load the images and set the basic variables
-init : function (){
-	
+init : function () {
 	C.ctx = document.getElementById('canvas').getContext('2d');
 	C.cw = document.getElementById('canvas').width,
 	C.ch = document.getElementById('canvas').height;
 	
-	
 	C.monFriends = ['kdousse', 'basile.vu1'];
-	C.trainers = ['kdousse', 'basile.vu1'];
-	
+	C.trainers = ['luca.bron', 'sacha.bron'];
 	
 	C.p1 = new Image();
 	C.p1.onload = function() {
@@ -49,8 +46,10 @@ init : function (){
 	C.h3 = C.h2 + C.battleHeight;
 	C.h4 = C.ch;
 	
-	
-	
+	C.drawTextDialog("Welcome to MonsterFriends!", "Do you want to play?", function () {
+		C.drawButton(580, C.h3+50, 60, 42, "Yes", function () { console.log("Oui!") });
+		C.drawButton(680, C.h3+50, 60, 42, "No", function () { console.log("Non!") });
+	})
 },
 
 // function used to draw the game
@@ -59,7 +58,7 @@ drawFight : function () {
 	// p1 vs p2
 	C.imgSize = 50;
 	C.fontSize = 20;
-	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	C.font = C.fontSize+ 'pt ' + C.fontFamily;
 	
 	var ctx = C.ctx;
 	ctx.drawImage(C.lp1, C.headWidth/2 - C.imgSize*1.5, C.headHeight/2 - C.imgSize/2);
@@ -86,11 +85,9 @@ drawFight : function () {
 	var h3 = C.h3;
 	var h4 = C.h4;
 	
-	
-	
 	// name, lvl, hp
 	
-	ctx.lineWidth = 2;
+	ctx.lineWidth = 1;
 	ctx.strokeStyle = 'rgb(100,100,100)';
 	ctx.fillStyle = 'rgb(100,100,100)';
 	
@@ -145,10 +142,9 @@ drawFight : function () {
 	
 	var aw = C.actionsWidth;
 	var as = C.actionsSpace;
-	var aw = C.actionsWidth;
 	var ah = C.actionsHeight;
 	
-	C.drawRoundedRect(20, as, h3, aw - 2*as, ah - 10);
+	C.drawRoundedRect(10, as, h3+as, aw - 2*as, ah-2*as);
 	ctx.stroke();
 },
 
@@ -156,7 +152,7 @@ drawFight : function () {
 drawMenu : function (oid) {
 
 	C.fontSize = 20;
-	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
+	C.font = C.fontSize + 'pt ' + C.fontFamily;
 	
 	var ctx = C.ctx;
 	ctx.font = (C.font);
@@ -186,7 +182,7 @@ drawVictory : function () {
 
 
 // Draws the match history
- drawHistory : function (data) {
+drawHistory : function (data) {
 	C.fontSize = 20;
 	C.font = C.fontSize + 'pt Calibri,Geneva,Arial';
 	
@@ -217,7 +213,84 @@ drawEnemyChoice : function () {
 
 },
 
-// Useful function to draw rectangles with curved angles
+// Draws text in the dialog box
+drawTextDialog: function (line1, line2, callback) {
+  var s = C.actionsSpace;
+	var w = C.actionsWidth-2*s;
+  var h = C.actionsHeight-2*s;
+	
+  var m = 10;
+	
+	var x = s;
+	var y = C.h3+s;
+	
+	function drawLines(n, line1, line2) {
+		var n1 = Math.min(line1.length, n)
+		var n2 = Math.max(Math.min(line2.length, n-line1.length), 0)
+		
+		if(n == line1.length + line2.length + 1 && callback !== undefined) {
+			callback()
+			return false
+		}
+		
+		var chars1 = line1.slice(0, n1);
+		var chars2 = line2.slice(0, n2);
+		
+		C.ctx.save();
+		C.ctx.translate(x+m, y+m);
+		
+		C.ctx.clearRect(0, 0, w-2*m, h-2*m);
+
+		C.ctx.font = "22px "+C.fontFamily;
+		C.ctx.fillStyle = "black";
+		C.ctx.textAlign = "left";
+		C.ctx.textBaseline = "top";
+		
+		C.ctx.fillText(chars1, m, m, w-2*m);
+		
+		C.ctx.textBaseline = "bottom";
+		C.ctx.fillText(chars2, m, h-3*m, w-2*m);
+		
+		C.ctx.restore();
+		
+		setTimeout(function () {
+			drawLines(++n, line1, line2);
+		}, 80);
+	}
+	
+	drawLines(0, line1, line2);
+},
+
+drawButton: function (x, y, w, h, text, callback) {
+	var m = 10;
+	
+	C.ctx.save();
+	C.ctx.translate(x, y);
+	
+	C.ctx.strokeStyle = "black";
+	//C.ctx.strokeRect(x, y, w, h);
+	
+	C.drawRoundedRect(3, 0, 0, w, h);
+	
+	C.ctx.font = "22px "+C.fontFamily;
+	C.ctx.fillStyle = "black";
+	C.ctx.textAlign = "left";
+	C.ctx.textBaseline = "top";
+	C.ctx.fillStyle = "black";
+	C.ctx.fillText(text, m, m, w-2*m);
+	
+	C.ctx.restore();
+	
+	$("#canvas").click(function (e) {
+		var ex = e.offsetX;
+		var ey = e.offsetY;
+		if(ex >= x && ex <= x+w && ey >= y && ey <= y+h) {
+			callback();
+		}
+	})
+},
+
+>>>>>>> Draw Dialog and Draw Button
 drawRoundedRect : function (r, startx, starty, width, height) {
 	var ctx = C.ctx;
 	var pi = C.pi;
