@@ -32,7 +32,7 @@ Controller = {
 
 	init: function () {
 		C.init()
-		changeScene(Scene.MENU)
+		Controller.changeScene(Scene.MENU)
 	},
 	
 	changeScene: function(scene) {
