@@ -199,8 +199,8 @@ drawHistory : function (data) {
 // Draws the monsters 
 drawMonsters : function (data) {
 
-  var buttonWidth = 200;
-  var buttonHeight = 50;
+	var buttonWidth = 200;
+	var buttonHeight = 50;
 	var spaces = 10;
 	var margin = 10;
 	var sumHeights = C.ch - 7*spaces;
@@ -218,6 +218,7 @@ drawMonsters : function (data) {
 		C.ctx.fillStyle = 'rgb(197,197,197)';
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
+		imgFile.onload = function() {};
 		var fbid = data[i].fb_id;
 		console.log(fbid);
 		imgFile.src = 'http://graph.facebook.com/' + fbid + '/picture';
@@ -276,11 +277,11 @@ drawEnemyChoice : function (data) {
 
 // Draws text in the dialog box
 drawTextDialog: function (line1, line2, callback) {
-  var s = C.actionsSpace;
+	var s = C.actionsSpace;
 	var w = C.actionsWidth-2*s;
-  var h = C.actionsHeight-2*s;
+	var h = C.actionsHeight-2*s;
 	
-  var m = 10;
+	var m = 10;
 	
 	var x = s;
 	var y = C.h3+s;
@@ -290,8 +291,8 @@ drawTextDialog: function (line1, line2, callback) {
 		var n2 = Math.max(Math.min(line2.length, n-line1.length), 0)
 		
 		if(n == line1.length + line2.length + 1 && callback !== undefined) {
-			callback()
-			return false
+			callback();
+			return false;
 		}
 		
 		var chars1 = line1.slice(0, n1);
@@ -389,7 +390,7 @@ drawHpBar : function (x, y, w, h, hp, hpMax) {
 		C.ctx.fillStyle = 'rgb(255,200,59)';
 	}
 	else {
-		C.ctx.fillStyle = 'rgb(255,72,59)'
+		C.ctx.fillStyle = 'rgb(255,72,59)';
 	}
 	
 	ctx.clearRect(x, y, w, h);
@@ -409,9 +410,9 @@ clear : function () {
 },
 
 drawConnectionRequired: function () {
-	C.ctx.clear()
-	C.ctx.save()
-	C.ctx.translate(400, 20)
+	C.ctx.clear();
+	C.ctx.save();
+	C.ctx.translate(400, 20);
 	
 	C.ctx.font = "22px "+C.fontFamily;
 	C.ctx.fillStyle = "black";
@@ -420,7 +421,7 @@ drawConnectionRequired: function () {
 	
 	C.ctx.fillText("You have to be connected with Facebook to play.", 0, 0, 800);
 	
-	C.ctx.restore()
+	C.ctx.restore();
 },
 
 drawAttackDialog: function (a1, a2, a3, a4, cb) {
