@@ -218,10 +218,11 @@ drawMonsters : function (data) {
 		C.ctx.fillStyle = 'rgb(197,197,197)';
 		C.ctx.fillRect(margin, containerHeight*i + (i+1)*spaces, containerWidth, containerHeight);
 		var imgFile = new Image();
-		imgFile.onload = function() {};
+		imgFile.onload = function() {}
+		imgFile.src = 'http://graph.facebook.com/' + fbid + '/picture';
+		console.log(imgFile.src);
 		var fbid = data[i].fb_id;
 		console.log(fbid);
-		imgFile.src = 'http://graph.facebook.com/' + fbid + '/picture';
 		var level = data[i].level;
 		var hpMax = data[i].pv_max;
 		var hp = data[i].pv;
